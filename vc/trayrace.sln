@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "trayrace", "trayrace.vcxproj", "{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{50B25225-5FF8-4105-8B53-4622DDE7A8D6}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+		Performance2.psess = Performance2.psess
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "trayrace-gui", "trayrace-gui\trayrace-gui.csproj", "{306CD812-975A-4051-B27D-A298D5A11F5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Debug|Win32.ActiveCfg = Debug|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Debug|Win32.Build.0 = Debug|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Debug|x64.ActiveCfg = Debug|x64
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Debug|x64.Build.0 = Debug|x64
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|Any CPU.ActiveCfg = Release|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|Win32.ActiveCfg = Release|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|Win32.Build.0 = Release|Win32
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|x64.ActiveCfg = Release|x64
+		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|x64.Build.0 = Release|x64
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Release|Win32.ActiveCfg = Release|Any CPU
+		{306CD812-975A-4051-B27D-A298D5A11F5D}.Release|x64.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

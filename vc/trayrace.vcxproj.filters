@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Shapes">
+      <UniqueIdentifier>{46af9f98-5ec4-42d9-864a-4c43cdf86572}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Paints">
+      <UniqueIdentifier>{c77ed36d-341c-4bc9-9f74-4b4a89e048b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Algebra">
+      <UniqueIdentifier>{23abfaef-52d8-4811-b9c9-b7dc9aea7d86}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\scene.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\camera.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\cell.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\light.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\profile.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\viewport8bit.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\viewportFloat.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\viewport.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\tiffOutput.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SceneStruct.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\boundBox.hpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\boundOblong.hpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\circle3d.hpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\cube.hpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\plane3d.hpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\shape.hpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\sphere.hpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\square3d.hpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\paint.hpp">
+      <Filter>Source Files\Paints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\texture.hpp">
+      <Filter>Source Files\Paints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\line3d.hpp">
+      <Filter>Source Files\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\matrix3d.hpp">
+      <Filter>Source Files\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\point3d.hpp">
+      <Filter>Source Files\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\unit3d.hpp">
+      <Filter>Source Files\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\checkerboard.hpp">
+      <Filter>Source Files\Paints</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
