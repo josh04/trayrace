@@ -63,7 +63,10 @@ namespace tr {
 			int64_t cells_per_thread = (cellcount - overflow) / 4;
 			std::atomic_int64_t count4 = 0;
 
-			int64_t start1 = 0, start2 = cells_per_thread, start3 = cells_per_thread * 2, start4 = cells_per_thread * 3;
+			int64_t start1 = 0,
+				start2 = cells_per_thread,
+				start3 = cells_per_thread * 2,
+				start4 = cells_per_thread * 3;
 
 			std::thread thread1(std::bind(Camera::subSnap, start1, cells_per_thread, viewport, cells, shapes, lights, std::ref(count4)));
 			std::thread thread2(std::bind(Camera::subSnap, start2, cells_per_thread, viewport, cells, shapes, lights, std::ref(count4)));
