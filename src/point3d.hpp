@@ -2,6 +2,7 @@
 #define POINT3D_HPP
 
 #include <vector>
+#include <cmath>
 
 using std::vector;
 

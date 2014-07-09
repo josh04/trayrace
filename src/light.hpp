@@ -43,7 +43,7 @@ namespace tr {
 				return *this;
 			}
 
-			rgb operator-() {
+			void operator-() {
 				r = -r;
 				g = -g;
 				b = -b;

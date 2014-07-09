@@ -24,9 +24,9 @@ namespace tr {
 			return *this;
 		}
 
-		point3d intersect() {
+/*		point3d intersect() {
 			
-		}
+		}*/
 
 		const point3d getPoint(double distance) const {
 			return point3d(point + distance*direction);

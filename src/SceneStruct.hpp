@@ -19,8 +19,8 @@ namespace tr {
 			waistRotation = 15;
 			headTilt = -15;
 			horizontalFov = 90.0;
-			width = 1920;
-			height = 1080;
+			width = 1280;
+			height = 720;
 		}
 
 		point3d CameraLocation;
