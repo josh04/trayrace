@@ -6,6 +6,10 @@
 namespace tr {
 	class line3d {
 	public:
+        line3d() : point(point3d(0)), direction(point3d(0)) {
+            
+        }
+        
 		line3d(point3d point, unit3d direction) 
 		: point(point), direction(direction) {
 		}
@@ -18,7 +22,7 @@ namespace tr {
 
 		}
 
-		line3d& operator=(line3d& rhs) {
+		line3d& operator=(const line3d& rhs) {
 			point = rhs.point;
 			direction = rhs.direction;
 			return *this;

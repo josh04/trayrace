@@ -33,19 +33,6 @@ namespace tr {
 
 		}
         
-        void relocate(const point3d addloc, const double addlen, const double addtheta, const double addphi) {
-            location = location + addloc;
-            length = length + addlen;
-            theta = theta + addtheta;
-            phi = phi + addphi;
-            const yRotation xrot(theta * (M_PI / 180.0));
-            const zRotation yrot(phi * (M_PI / 180.0));
-            orthonormalUp = point3d(0, 1, 0)*xrot*yrot;
-            orthonormalRight = point3d(1, 0, 0)*xrot*yrot;
-            orthonormalForward = point3d(0, 0, 1)*xrot*yrot;
-            coordTrans = coordTransform(orthonormalRight, orthonormalUp, orthonormalForward);
-        }
-
 		virtual bool intersection(const line3d& ray, double &distance, Light::rgb &colour) const {
             const line3d rebaseRay((ray.point-location)*coordTrans, ray.direction*coordTrans);
             //const line3d rebaseRay = ray;
@@ -151,6 +138,39 @@ namespace tr {
                     break;
             }
         }
+        
+        void move(const point3d& newLocation) {
+            move(newLocation, 0, 0, 0);
+        }
+        
+        void move(const double newLength, const double newTheta, const double newPhi) {
+            move(point3d(0), newLength, newTheta, newPhi);
+        }
+        
+        void move(const point3d& newLocation, const double newLength, const double newTheta, const double newPhi) {
+            location += newLocation;
+            
+            length += newLength;
+            
+            top.move(newLength, newLength/2, 0, 0, 0);
+            bottom.move(newLength, newLength/2, 0, 0, 0);
+            front.move(newLength, newLength/2, 0, 0, 0);
+            back.move(newLength, newLength/2, 0, 0, 0);
+            left.move(newLength, newLength/2, 0, 0, 0);
+            right.move(newLength, newLength/2, 0, 0, 0);
+            
+            theta += newTheta;
+            phi += newPhi;
+            const yRotation yrot(theta * (M_PI / 180.0));
+            const zRotation zrot(phi * (M_PI / 180.0));
+            orthonormalUp = point3d(0, 1, 0)*zrot*yrot;
+            orthonormalRight = point3d(1, 0, 0)*zrot*yrot;
+            orthonormalForward = point3d(0, 0, 1)*zrot*yrot;
+            
+            coordTrans = coordTransform(orthonormalRight, orthonormalUp, orthonormalForward);
+            
+            movement = motion3d(-newLocation, (zRotation(newPhi * (M_PI / 180.0))*yRotation(newTheta*(M_PI / 180.0))).inverse());
+        }
 
 	private:
 		unit3d norm;
@@ -168,6 +188,7 @@ namespace tr {
         double theta = 0.0, phi = 0.0, length = 0.0;
         
         coordTransform coordTrans;
+        
 	};
 }
 #endif;

@@ -38,6 +38,16 @@ namespace tr {
 
 			return true;
 		}
+       
+        void move(const double newLength, const double newDistance, const double newPhi, const double newTheta, const double newRho) {
+            length += newLength;
+            distance += newDistance;
+            phi += newPhi;
+            theta += newTheta;
+            rho += newRho;
+            xrot = xRotation(rho);
+            plane3d::move();
+        }
 
 	private:
 		double length;

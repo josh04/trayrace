@@ -4,16 +4,10 @@
 #include <vector>
 #include <memory>
 
-#include "shape.hpp"
-#include "light.hpp"
+#include "types.hpp"
 
 using std::shared_ptr;
 using std::vector;
-
-namespace tr {
-	typedef shared_ptr<vector<shared_ptr<Shape>>> Shapes;
-	typedef shared_ptr<vector<shared_ptr<Light>>> Lights;
-}
 
 #include "SceneStruct.hpp"
 #include "sphere.hpp"
@@ -90,15 +84,16 @@ namespace tr {
 			lights->push_back(light2);
 		}
 
-		void moveCamera(point3d CameraLocation, int waistRotation, int headTilt, double horizontalFov, unsigned int width, unsigned int height) {
-			camera.reset();
-			camera = std::make_shared<Camera>(CameraLocation, waistRotation, headTilt, horizontalFov, width, height);
+		void moveCamera(point3d move, int waistRotation, int headTilt, double horizontalFov) {
+			camera->move(move, waistRotation, headTilt, horizontalFov);
 		}
         
         void moveObject() {
             //cuberot = cuberot+1;
             point3d newcubeloc = cubeloc*yRotation(cuberot*(M_PI/180));
-            cube->relocate(newcubeloc-cubeloc, 0.0, 0.0, 10);
+            //newcubeloc += point3d(5,0,0);
+            cube->move(newcubeloc-cubeloc, 0.0, 0.0, 10);
+            //cube->move(point3d(0), 0.0, 0.0, 10);
             cubeloc = newcubeloc;
         }
 
