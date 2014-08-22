@@ -99,9 +99,17 @@ namespace tr {
 
 		~Scene() {}
 
-		void snap(shared_ptr<Viewport> viewport, shared_ptr<Viewport> depthMap, shared_ptr<Viewport> normalMap, shared_ptr<Viewport> colourMap) {
-			camera->snap(viewport, depthMap, normalMap, colourMap, shapes, lights);
+		void preSnap(shared_ptr<Viewport> depthMap, shared_ptr<Viewport> normalMap, shared_ptr<Viewport> colourMap) {
+            camera->activateAll();
+			camera->preliminary_snap(depthMap, normalMap, colourMap, shapes, lights);
 		}
+        
+        void snap(uint8_t const * redraw, shared_ptr<Viewport> viewport) {
+            if (redraw != nullptr) {
+                camera->activateMap(redraw);
+            }
+            camera->final_snap(viewport, shapes, lights);
+        }
 
 	private:
         double cuberot = 5.0;

@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/main.cpp"
-            timestampString = "428192075.997801"
+            timestampString = "430227193.618615"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "doTrayRaceThread(SceneStruct sconfig, std::atomic&lt;bool&gt; * stop, std::vector&lt;std::shared_ptr&lt;inputMethods&gt;&gt; inputPtrs)"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "doTrayRaceThread(SceneStruct sconfig, std::atomic&lt;bool&gt; * stop, std::vector&lt;std::shared_ptr&lt;inputMethods&gt;&gt; inputPtrs, std::shared_ptr&lt;trayraceProcessor&gt; vmp)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "429737931.591526"
+            timestampString = "430227351.622898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "fire_light(const Shapes&amp; shapes, const Light&amp; light, const line3d&amp; ray, const rayProps&amp; props)"
             landmarkType = "5">
          </BreakpointContent>

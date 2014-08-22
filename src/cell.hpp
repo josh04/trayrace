@@ -20,7 +20,7 @@ using std::shared_ptr;
 namespace tr {
 	class Cell {
 	public:
-		Cell(const unsigned int& x, const unsigned int& y, const unsigned int& w, unsigned int& h)
+		Cell(const unsigned int& x, const unsigned int& y, const unsigned int& w, const unsigned int& h)
 			: ray(line3d()), x(x), y(y), w(w), h(h), u(point3d(0)), v(point3d(0)) {
 
 		}
@@ -29,10 +29,23 @@ namespace tr {
 
 		}
         
+        void activate() {
+            active = true;
+        }
+        
+        void deactivate() {
+            active = false;
+        }
+        
+        bool isActive() const {
+            return active;
+        }
+        
         void move(const line3d& ray, const point3d& u, const point3d& v) {
             this->ray = ray;
             this->u = u;
             this->v = v;
+            isCached = false;
         }
         
         struct rayProps {
@@ -60,15 +73,53 @@ namespace tr {
             colour += fire_reflections(shapes, lights, ray, props, recurse);
             return colour;
         }
-
-		const Light::rgb fire(Shapes shapes, Lights lights, const line3d& ray, const motion3d& cameraMotion, rayProps &props) const {
+        
+        const Light::rgb preliminary_fire(Shapes shapes, Lights lights, const motion3d& cameraMotion, returnProps &reProps) {
+            rayProps props;
             fire_primary(shapes, ray, props);
             Light::rgb colour(0);
-            
+            if (props.failedToHit) {
+                return colour;
+            }
             const point3d pt = fire_reprojection(props, ray, cameraMotion, w, h);
             
             props.movement = pt;
-       
+            
+            cachedProps = props;
+            isCached = true;
+            
+            /*if (x % 100 == 0 && y % 100 == 0) {
+             if (abs(x - pt.x) > 1) {
+             std::cout << "x: " << x << " y: " << y << " new x: " << pt.x << " new y: " << pt.y << std::endl;
+             }
+             }*/
+            
+            reProps.depth = props.depth;
+            reProps.normal = props.normal;
+            reProps.colourMap = props.colour;
+            
+            reProps.movement.x = x - props.movement.x;
+            reProps.movement.y = y - props.movement.y;
+            reProps.movement.z = props.movement.z;
+            
+            return colour;
+        }
+
+		const Light::rgb final_fire(Shapes shapes, Lights lights, const motion3d& cameraMotion, returnProps &reProps) const {
+            rayProps props;
+            Light::rgb colour(0);
+            if (isCached) {
+                props = cachedProps;
+            } else {
+                fire_primary(shapes, ray, props);
+                if (props.failedToHit) {
+                    return colour;
+                }
+                const point3d pt = fire_reprojection(props, ray, cameraMotion, w, h);
+                
+                props.movement = pt;
+            }
+            
             /*if (x % 100 == 0 && y % 100 == 0) {
                 if (abs(x - pt.x) > 1) {
                 std::cout << "x: " << x << " y: " << y << " new x: " << pt.x << " new y: " << pt.y << std::endl;
@@ -77,9 +128,18 @@ namespace tr {
         
             colour += fire_lights(shapes, lights, ray, props);
             colour += fire_reflections(shapes, lights, ray, props, 0);
+            
+            reProps.depth = props.depth;
+            reProps.normal = props.normal;
+            reProps.colourMap = props.colour;
+            
+            reProps.movement.x = x - props.movement.x;
+            reProps.movement.y = y - props.movement.y;
+            reProps.movement.z = props.movement.z;
+            
             return colour;
 		}
-
+/*
 		const Light::rgb fire4(Shapes shapes, Lights lights, const motion3d& cameraMotion, returnProps& props) const {
 			const line3d ray1(ray.point, ray.direction + (-0.25 / h)*u + (-0.25 / w)*v);
 			const line3d ray2(ray.point, ray.direction + (-0.25 / h)*u + (+0.25 / w)*v);
@@ -88,10 +148,10 @@ namespace tr {
             
             rayProps props1, props2, props3, props4;
             
-			Light::rgb colour1 = fire(std::ref(shapes), std::ref(lights), ray1, cameraMotion, props1);
+/*			Light::rgb colour1 = fire(std::ref(shapes), std::ref(lights), ray1, cameraMotion, props1);
 			Light::rgb colour2 = fire(std::ref(shapes), std::ref(lights), ray2, cameraMotion, props2);
 			Light::rgb colour3 = fire(std::ref(shapes), std::ref(lights), ray3, cameraMotion, props3);
-			Light::rgb colour4 = fire(std::ref(shapes), std::ref(lights), ray4, cameraMotion, props4);
+			Light::rgb colour4 = fire(std::ref(shapes), std::ref(lights), ray4, cameraMotion, props4);*
 
 			Light::rgb colour;
 			colour.r = (colour1.r + colour2.r + colour3.r + colour4.r) / 4;
@@ -107,7 +167,7 @@ namespace tr {
             props.movement.z = (props1.movement.z + props2.movement.z + props3.movement.z + props4.movement.z) / 4;
             
 			return colour;
-		}
+		}*/
 
 	private:
         static const void fire_primary(const Shapes& shapes, const line3d& ray, rayProps& props) {
@@ -269,6 +329,11 @@ namespace tr {
 		line3d ray;
 		const unsigned int x, y, w, h;
 		point3d u, v;
+        
+        bool isCached = false;
+        rayProps cachedProps;
+        
+        bool active = true;
 	};
 }
 

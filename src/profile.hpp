@@ -3,7 +3,7 @@
 //  compressor
 //
 //  Created by Jonathan Hatchett on 25/07/2012.
-//  Copyright (c) 2012 goHDR. All rights reserved.
+//  Copyright (c) 2012. All rights reserved.
 //
 
 #ifndef PROFILE_HPP
