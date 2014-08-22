@@ -49,7 +49,6 @@ public:
         addItem((unsigned char *)context->buffer(_width*_height*sizeof(cl_uchar)));
         
         discontinuities->setArg(0, *((cl::Buffer *)_getMem(0)));
-        discontinuities->setArg(2, *previousDepth);
         
         queue = context->getQueue();
     }
@@ -82,17 +81,18 @@ public:
         event.wait();*/
 
         discontinuities->setArg(1, *mot);
+        discontinuities->setArg(2, *inDepth);
 //        discontinuities->setArg(3, *in);
         queue->enqueueNDRangeKernel(*discontinuities, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
         motionVectors->outUnlock();
-        
+        /*
         copyImage->setArg(0, *inDepth);
         copyImage->setArg(1, *previousDepth);
         queue->enqueueNDRangeKernel(*copyImage, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
-        
+        */
         depth->outUnlock();
         
         inUnlock();

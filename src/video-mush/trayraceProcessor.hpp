@@ -15,6 +15,7 @@
 #include <Video Mush/nullProcess.hpp>
 #include <Video Mush/doubleBuffer.hpp>
 #include <Video Mush/laplaceProcess.hpp>
+#include <Video Mush/delayProcess.hpp>
 #include "edgeThreshold.hpp"
 #include "diffuseProcess.hpp"
 #include "getDiscontinuities.hpp"
@@ -53,18 +54,24 @@ public:
         normalExposure = make_shared<fixedExposureProcess>(darken);
         normalExposure->init(context, buffers[2]);
         
-        colourExposure = make_shared<fixedExposureProcess>(0);
-        colourExposure->init(context, buffers[3]);
+        motionDoubler = make_shared<mush::doubleBuffer>();
+        motionDoubler->init(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
         
-        colourDoubler = make_shared<mush::doubleBuffer>();
-        colourDoubler->init(std::dynamic_pointer_cast<mush::imageBuffer>(colourExposure));
+        motionDoubler2 = make_shared<mush::doubleBuffer>();
+        motionDoubler2->init(std::dynamic_pointer_cast<mush::imageBuffer>(motionDoubler->getFirst()));
+        
+        motionExposure = make_shared<fixedExposureProcess>(-8.0f);
+        motionExposure->init(context, motionDoubler2->getSecond());
         
         // and send back the redrawmap
         
+        depthDelay = make_shared<mush::delayProcess>();
+        depthDelay->init(context, depthDoubler->getSecond());
+        
         discontinuities = make_shared<getDiscontinuities>();
         std::vector<std::shared_ptr<mush::ringBuffer>> motBuff;
-        motBuff.push_back(colourDoubler->getFirst());
-        motBuff.push_back(depthDoubler->getSecond());
+        motBuff.push_back(motionDoubler2->getFirst());
+        motBuff.push_back(depthDelay);
         discontinuities->init(context, motBuff);
         
         redraw = make_shared<trayraceRedraw>();
@@ -82,7 +89,7 @@ public:
         std::vector<std::shared_ptr<mush::ringBuffer>> composeBuff;
         composeBuff.push_back(mainDoubler->getFirst());
         composeBuff.push_back(redraw);
-        composeBuff.push_back(colourDoubler->getSecond());
+        composeBuff.push_back(motionDoubler->getSecond());
         compose->init(context, composeBuff);
         
         // then we can get the main image and start workin'
@@ -101,11 +108,11 @@ public:
         diffuse->init(context, edge);
 
         _guiBuffers.push_back(compose);
-//        _guiBuffers.push_back(depthExposure);
+        _guiBuffers.push_back(depthExposure);
 //        _guiBuffers.push_back(laplace);
 //        _guiBuffers.push_back(edge);
-        _guiBuffers.push_back(colourExposure);
-        _guiBuffers.push_back(discontinuities);
+        _guiBuffers.push_back(motionExposure);
+//        _guiBuffers.push_back(discontinuities);
         _guiBuffers.push_back(redraw);
 //        _guiBuffers.push_back(colourExposure);
         _guiBuffers.push_back(mainExposure);
@@ -115,6 +122,7 @@ public:
         
         _nulls.push_back(diffuse);
         _nulls.push_back(normalExposure);
+        _nulls.push_back(motionExposure);
 //        _nulls.push_back(colourExposure);
 //        _nulls.push_back(redraw);
         
@@ -136,13 +144,14 @@ public:
         profile.executionStart();
         
         normalExposure->process();
-        colourExposure->process();
+        motionExposure->process();
         discontinuities->process();
         redraw->process();
         
         mainExposure->process();
         compose->process();
         depthExposure->process();
+        depthDelay->process();
         laplace->process();
         edge->process();
         diffuse->process();
@@ -215,10 +224,6 @@ public:
             normalExposure->release();
         }
         
-        if (colourExposure != nullptr) {
-            colourExposure->release();
-        }
-        
         if (discontinuities != nullptr) {
             discontinuities->release();
         }
@@ -249,15 +254,17 @@ private:
     shared_ptr <mush::imageProcess> mainExposure  = nullptr;
     shared_ptr <mush::imageProcess> depthExposure  = nullptr;
     shared_ptr <mush::imageProcess> normalExposure  = nullptr;
-    shared_ptr <mush::imageProcess> colourExposure  = nullptr;
+    shared_ptr <mush::imageProcess> motionExposure  = nullptr;
+    shared_ptr <mush::imageProcess> depthDelay  = nullptr;
     
     shared_ptr <mush::integerMapProcess> discontinuities  = nullptr;
     shared_ptr <mush::integerMapProcess> redraw  = nullptr;
     shared_ptr <mush::imageProcess> compose  = nullptr;
     
-    std::shared_ptr<mush::doubleBuffer> colourDoubler;
-    std::shared_ptr<mush::doubleBuffer> depthDoubler;
-    std::shared_ptr<mush::doubleBuffer> mainDoubler;
+    std::shared_ptr<mush::doubleBuffer> motionDoubler = nullptr;
+    std::shared_ptr<mush::doubleBuffer> motionDoubler2 = nullptr;
+    std::shared_ptr<mush::doubleBuffer> depthDoubler = nullptr;
+    std::shared_ptr<mush::doubleBuffer> mainDoubler = nullptr;
     
     std::vector<std::shared_ptr<mush::imageProcess>> _nulls;
     

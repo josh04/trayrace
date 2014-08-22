@@ -87,7 +87,7 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
         
 		sconfig.waistRotation -= 1;
 		sconfig.CameraLocation = sconfig.CameraLocation * yRotation(-1.0*(M_PI/180.0));//+ point3d(0.5, 0, 0.5);
-//		scene.moveCamera(sconfig.CameraLocation, sconfig.waistRotation, sconfig.headTilt, sconfig.horizontalFov);
+		scene.moveCamera(sconfig.CameraLocation, sconfig.waistRotation, sconfig.headTilt, sconfig.horizontalFov);
         scene.moveObject();
 	}
     
