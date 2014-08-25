@@ -25,6 +25,8 @@ public:
         
         discontinuities = context->getKernel("discontinuities");
         copyImage = context->getKernel("copyImage");
+    
+        depthDiff = context->getKernel("depthDiff");
         
         if (buffers.size() < 2) {
             putLog("discontinuities kernel: not enough buffers");
@@ -86,6 +88,8 @@ public:
         queue->enqueueNDRangeKernel(*discontinuities, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
+        inUnlock(mot, inDepth);
+        
         motionVectors->outUnlock();
         /*
         copyImage->setArg(0, *inDepth);
@@ -95,13 +99,29 @@ public:
         */
         depth->outUnlock();
         
-        inUnlock();
     }
+    
+    virtual void inUnlock(cl::Image2D * mot, cl::Image2D * depth) {
+        if (getTagInGuiMember() && tagGui != nullptr) {
+            
+            depthDiff->setArg(0, *temp_image);
+            depthDiff->setArg(1, *mot);
+            depthDiff->setArg(2, *depth);
+            cl::Event event;
+            queue->enqueueNDRangeKernel(*depthDiff, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
+            event.wait();
+            tagGui->copyImageIntoGuiBuffer(getTagInGuiIndex(), temp_image);
+        }
+        ringBuffer::inUnlock();
+    }
+    
     
 private:
     cl::CommandQueue * queue = nullptr;
     cl::Kernel * discontinuities = nullptr;
     cl::Kernel * copyImage = nullptr;
+    
+    cl::Kernel * depthDiff = nullptr;
     
     cl::Image2D * previousDepth = nullptr;
     

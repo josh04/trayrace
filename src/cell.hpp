@@ -41,10 +41,11 @@ namespace tr {
             return active;
         }
         
-        void move(const line3d& ray, const point3d& u, const point3d& v) {
+        void move(const line3d& ray, const point3d& u, const point3d& v, const double& horizontalFOV) {
             this->ray = ray;
             this->u = u;
             this->v = v;
+            this->horizontalFOV = horizontalFOV;
             isCached = false;
         }
         
@@ -81,7 +82,7 @@ namespace tr {
             if (props.failedToHit) {
                 return colour;
             }
-            const point3d pt = fire_reprojection(props, ray, cameraMotion, w, h);
+            const point3d pt = fire_reprojection(props, ray, cameraMotion, w, h, horizontalFOV);
             
             props.movement = pt;
             
@@ -115,7 +116,7 @@ namespace tr {
                 if (props.failedToHit) {
                     return colour;
                 }
-                const point3d pt = fire_reprojection(props, ray, cameraMotion, w, h);
+                const point3d pt = fire_reprojection(props, ray, cameraMotion, w, h, horizontalFOV);
                 
                 props.movement = pt;
             }
@@ -208,7 +209,7 @@ namespace tr {
             props.depth = least_distance;
         }
         
-        static const point3d fire_reprojection(const rayProps& props, const line3d& ray, const motion3d& cameraMotion, const double width, const double height) {
+        static const point3d fire_reprojection(const rayProps& props, const line3d& ray, const motion3d& cameraMotion, const double width, const double height, const double horizontalFOV) {
             
             motion3d reloc = props.intersectedShape->getMotion();
             
@@ -218,7 +219,7 @@ namespace tr {
               
             point3d transDir = dir*cameraMotion.rotate;
             
-			double n = tan(90.0 / 2.0*(M_PI / 180.0));
+			double n = tan(horizontalFOV / 2.0*(M_PI / 180.0));
             
             double div = transDir.x/n;
             
@@ -325,7 +326,7 @@ namespace tr {
             return props.intersectedShape->reflective * reflection;
         }
         
-        
+        double horizontalFOV;
 		line3d ray;
 		const unsigned int x, y, w, h;
 		point3d u, v;

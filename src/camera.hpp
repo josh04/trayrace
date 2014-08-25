@@ -75,7 +75,7 @@ namespace tr {
                     
                     for (uint32 k = 0; k < _vSubsample; ++k) {
                         unit3d dir = gaze*n + v*ratio*(-1.0 + 2*((0.5 + j+k) / (height * _vSubsample))) + u*(-1.0 + 2*((0.5 + i) / (width * _hSubsample)));
-                        cells[j*width*_hSubsample + i*_vSubsample + k].move(line3d(location, dir), u, v);
+                        cells[j*width*_hSubsample + i*_vSubsample + k].move(line3d(location, dir), u, v, horizontalFOV);
                     }
 
 				}
@@ -178,6 +178,8 @@ namespace tr {
                         colour += cells[(start+i) * _hSubsample * _vSubsample + k].preliminary_fire(shapes, lights, motion, tempProps);
                         props.depth += tempProps.depth;
                         props.normal += tempProps.normal;
+                        tempProps.movement.x = tempProps.movement.x / _hSubsample;
+                        tempProps.movement.y = tempProps.movement.y / _vSubsample;
                         props.movement += tempProps.movement;
                     }
                 }
@@ -185,6 +187,8 @@ namespace tr {
                 props.depth = props.depth / (double)(_hSubsample * _vSubsample);
                 props.normal = props.normal / (double)(_hSubsample * _vSubsample);
                 props.movement = props.movement / (double)(_hSubsample * _vSubsample);
+//                props.movement.x = x - props.movement.x;
+//                props.movement.y = y - props.movement.y;
                 
                 depthMap->put(Light::rgb(props.depth, props.depth, props.depth), start+i);
                 normalMap->put(Light::rgb(props.normal.x, props.normal.y, props.normal.z), start+i);

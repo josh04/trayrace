@@ -39,6 +39,9 @@ public:
         if (buffers.size() < 1) {
             putLog("No buffers at encoder");
         }
+        
+        steppers.push_back(std::make_shared<mush::frameStepper>());
+//        steppers.push_back(std::make_shared<mush::frameStepper>());
 
 //        doublers.push_back(make_shared<mush::doubleBuffer>());
 //        doublers[2]->init(std::dynamic_pointer_cast<mush::imageBuffer>(doublers[1]->getSecond()));
@@ -112,8 +115,8 @@ public:
 //        _guiBuffers.push_back(laplace);
 //        _guiBuffers.push_back(edge);
         _guiBuffers.push_back(motionExposure);
-//        _guiBuffers.push_back(discontinuities);
-        _guiBuffers.push_back(redraw);
+        _guiBuffers.push_back(discontinuities);
+//        _guiBuffers.push_back(redraw);
 //        _guiBuffers.push_back(colourExposure);
         _guiBuffers.push_back(mainExposure);
         
@@ -144,14 +147,16 @@ public:
         profile.executionStart();
         
         normalExposure->process();
+        depthDelay->process();
+//        steppers[1]->process();
         motionExposure->process();
+        steppers[0]->process();
         discontinuities->process();
         redraw->process();
         
         mainExposure->process();
         compose->process();
         depthExposure->process();
-        depthDelay->process();
         laplace->process();
         edge->process();
         diffuse->process();
@@ -197,6 +202,10 @@ public:
         const std::vector<std::shared_ptr<mush::imageBuffer>> buffs = _guiBuffers;
         _guiBuffers.clear();
         return buffs;
+    }
+    
+    std::vector<std::shared_ptr<mush::frameStepper>> getFrameSteppers() {
+        return steppers;
     }
     
     void go() {
@@ -269,6 +278,8 @@ private:
     std::vector<std::shared_ptr<mush::imageProcess>> _nulls;
     
     std::vector<std::shared_ptr<mush::imageBuffer>> _guiBuffers;
+    
+    std::vector<std::shared_ptr<mush::frameStepper>> steppers;
     
 	float gamma;
 	float darken;

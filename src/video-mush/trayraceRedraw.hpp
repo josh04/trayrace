@@ -21,6 +21,11 @@ public:
         
     }
     
+    void release() {
+        mapBuffer.kill();
+        integerMapProcess::release();
+    }
+    
     void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers) {
         
         redraw = context->getKernel("redraw");
@@ -57,6 +62,7 @@ public:
         cl::Buffer * discont = (cl::Buffer *)discontinuities->outLock();
         if (discont == nullptr) {
             release();
+            mapBuffer.kill();
             return;
         }
         
