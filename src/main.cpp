@@ -5,10 +5,15 @@
 #include <iostream>
 #include <tiffio.h>
 
+#ifdef __APPLE__
 #import <Cocoa/Cocoa.h>
-
 #include <Video Mush/ConfigStruct.hpp>
 #include <Video Mush/exports.hpp>
+#endif
+
+#ifdef _WIN32
+#include "exports.hpp"
+#endif
 
 #include "scene.hpp"
 #include "viewport8bit.hpp"
@@ -29,6 +34,8 @@ void doThread(unsigned int width, unsigned int height) {
 	config.inputConfig.inputHeight = height;
 	config.width = width;
 	config.height = height;
+	config.outputConfig.width = width;
+	config.outputConfig.height = height;
 	// external input
 	config.inputEngine = hdr::inputEngine::externalInput;
 	// gohdr method
@@ -42,14 +49,20 @@ void doThread(unsigned int width, unsigned int height) {
 	config.sim2preview = false;
 	// pixel format for external input
 	config.inputConfig.input_pix_fmt = hdr::input_pix_fmt::float_4channel;
-    
+	
+#ifdef __APPLE__
     NSString * frDir = [NSString stringWithFormat:@"%@/%@", @".", @"Video Mush.framework"];
 	NSString * resDir = [[[NSBundle bundleWithPath:frDir] resourcePath] stringByAppendingString:@"/"];
-	config.resourceDir =[resDir UTF8String];
-    config.inputConfig.resourceDir =[resDir UTF8String];
-    
+	config.resourceDir = [resDir UTF8String];
+    config.inputConfig.resourceDir = [resDir UTF8String];
+#endif
+#ifdef _WIN32
+	config.resourceDir = "./";
+	config.inputConfig.resourceDir = "./";
+#endif
+
 	config.filename = "testRender_1080_";
-    config.outputConfig.outputPath = "/Users/josh04/trayrace";
+    config.outputConfig.outputPath = "../output";
     config.outputConfig.outputName = "trayrace.mp4";
     
 	// run function in thread
@@ -111,7 +124,7 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop) {
                         sconfig.headTilt, sconfig.horizontalFov, sconfig.width, sconfig.height);
         scene.moveObject();
 	}
-    
+	releaseInput();
 	// done!
 }
 

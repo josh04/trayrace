@@ -100,7 +100,7 @@ namespace tr {
 
 				if (!blocked && (intersectedShape.get() != light->shape.get())) {
 					// diffuse lighting
-#ifdef _DEBUG
+#ifdef JOSH_DEBUG
 					std::string s = typeid(*intersectedShape).name();
 					if (s == "BoundOblong") {
 						int i = 1 + 2;
