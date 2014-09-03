@@ -41,30 +41,17 @@ public:
         }
         
         steppers.push_back(std::make_shared<mush::frameStepper>());
-//        steppers.push_back(std::make_shared<mush::frameStepper>());
-
-//        doublers.push_back(make_shared<mush::doubleBuffer>());
-//        doublers[2]->init(std::dynamic_pointer_cast<mush::imageBuffer>(doublers[1]->getSecond()));
         
         // take the three prelim buffers first
         
         depthDoubler = make_shared<mush::doubleBuffer>();
         depthDoubler->init(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
         
-        depthExposure = make_shared<fixedExposureProcess>(-8.0f);
-        depthExposure->init(context, depthDoubler->getFirst());
-        
-        normalExposure = make_shared<fixedExposureProcess>(darken);
-        normalExposure->init(context, buffers[2]);
+        depthExposureDoubler = make_shared<mush::doubleBuffer>();
+        depthExposureDoubler->init(depthDoubler->getFirst());
         
         motionDoubler = make_shared<mush::doubleBuffer>();
         motionDoubler->init(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
-        
-        motionDoubler2 = make_shared<mush::doubleBuffer>();
-        motionDoubler2->init(std::dynamic_pointer_cast<mush::imageBuffer>(motionDoubler->getFirst()));
-        
-        motionExposure = make_shared<fixedExposureProcess>(-8.0f);
-        motionExposure->init(context, motionDoubler2->getSecond());
         
         // and send back the redrawmap
         
@@ -73,7 +60,7 @@ public:
         
         discontinuities = make_shared<getDiscontinuities>();
         std::vector<std::shared_ptr<mush::ringBuffer>> motBuff;
-        motBuff.push_back(motionDoubler2->getFirst());
+        motBuff.push_back(motionDoubler->getFirst());
         motBuff.push_back(depthDelay);
         discontinuities->init(context, motBuff);
         
@@ -82,28 +69,24 @@ public:
         
         inputBuffer = buffers[0];
         
-        mainExposure = make_shared<fixedExposureProcess>(darken);
+        mainExposure = make_shared<mush::fixedExposureProcess>(darken);
         mainExposure->init(context, inputBuffer);
-        
-        mainDoubler = make_shared<mush::doubleBuffer>();
-        mainDoubler->init(std::dynamic_pointer_cast<mush::imageBuffer>(mainExposure));
         
         compose = make_shared<trayraceCompose>();
         std::vector<std::shared_ptr<mush::ringBuffer>> composeBuff;
-        composeBuff.push_back(mainDoubler->getFirst());
+        composeBuff.push_back(mainExposure);
         composeBuff.push_back(redraw);
         composeBuff.push_back(motionDoubler->getSecond());
         compose->init(context, composeBuff);
         
         // then we can get the main image and start workin'
-        
 
         laplace = make_shared<laplaceProcess>();
-        laplace->init(context, depthExposure);
+        laplace->init(context, depthExposureDoubler->getFirst());
         
         edge = make_shared<edgeThreshold>();
         std::vector<std::shared_ptr<mush::ringBuffer>> edgeBuff;
-        edgeBuff.push_back(mainDoubler->getSecond());
+        edgeBuff.push_back(depthExposureDoubler->getSecond());
         edgeBuff.push_back(laplace);
         edge->init(context, edgeBuff);
         
@@ -111,21 +94,19 @@ public:
         diffuse->init(context, edge);
 
         _guiBuffers.push_back(compose);
-        _guiBuffers.push_back(depthExposure);
-//        _guiBuffers.push_back(laplace);
-//        _guiBuffers.push_back(edge);
-        _guiBuffers.push_back(motionExposure);
+        _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
+        _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
+        _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[2]));
+        _guiBuffers.push_back(laplace);
+        _guiBuffers.push_back(edge);
+        _guiBuffers.push_back(diffuse);
         _guiBuffers.push_back(discontinuities);
-//        _guiBuffers.push_back(redraw);
-//        _guiBuffers.push_back(colourExposure);
+        _guiBuffers.push_back(redraw);
         _guiBuffers.push_back(mainExposure);
         
-//        _guiBuffers.push_back(discontinuities);
         
         
         _nulls.push_back(diffuse);
-        _nulls.push_back(normalExposure);
-        _nulls.push_back(motionExposure);
 //        _nulls.push_back(colourExposure);
 //        _nulls.push_back(redraw);
         
@@ -146,17 +127,14 @@ public:
         
         profile.executionStart();
         
-        normalExposure->process();
         depthDelay->process();
 //        steppers[1]->process();
-        motionExposure->process();
         steppers[0]->process();
         discontinuities->process();
         redraw->process();
         
         mainExposure->process();
         compose->process();
-        depthExposure->process();
         laplace->process();
         edge->process();
         diffuse->process();
@@ -225,14 +203,6 @@ public:
             laplace->release();
         }
         
-        if (depthExposure != nullptr) {
-            depthExposure->release();
-        }
-        
-        if (normalExposure != nullptr) {
-            normalExposure->release();
-        }
-        
         if (discontinuities != nullptr) {
             discontinuities->release();
         }
@@ -261,9 +231,6 @@ private:
     shared_ptr <mush::imageProcess> diffuse = nullptr;
     
     shared_ptr <mush::imageProcess> mainExposure  = nullptr;
-    shared_ptr <mush::imageProcess> depthExposure  = nullptr;
-    shared_ptr <mush::imageProcess> normalExposure  = nullptr;
-    shared_ptr <mush::imageProcess> motionExposure  = nullptr;
     shared_ptr <mush::imageProcess> depthDelay  = nullptr;
     
     shared_ptr <mush::integerMapProcess> discontinuities  = nullptr;
@@ -273,7 +240,7 @@ private:
     std::shared_ptr<mush::doubleBuffer> motionDoubler = nullptr;
     std::shared_ptr<mush::doubleBuffer> motionDoubler2 = nullptr;
     std::shared_ptr<mush::doubleBuffer> depthDoubler = nullptr;
-    std::shared_ptr<mush::doubleBuffer> mainDoubler = nullptr;
+    std::shared_ptr<mush::doubleBuffer> depthExposureDoubler = nullptr;
     
     std::vector<std::shared_ptr<mush::imageProcess>> _nulls;
     
