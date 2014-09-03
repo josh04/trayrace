@@ -7,4 +7,7 @@
    <FileRef
       location = "group:trayrace.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:../../libazure/xc/azure/azure.xcodeproj">
+   </FileRef>
 </Workspace>

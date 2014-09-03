@@ -76,12 +76,7 @@ public:
             release();
             return;
         }
-        /*
-        copyImage->setArg(0, *previous);
-        copyImage->setArg(1, *((cl::Image2D *)_getMem(0)));
-        queue->enqueueNDRangeKernel(*copyImage, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
-        event.wait();*/
-
+        
         discontinuities->setArg(1, *mot);
         discontinuities->setArg(2, *inDepth);
 //        discontinuities->setArg(3, *in);
@@ -91,12 +86,7 @@ public:
         inUnlock(mot, inDepth);
         
         motionVectors->outUnlock();
-        /*
-        copyImage->setArg(0, *inDepth);
-        copyImage->setArg(1, *previousDepth);
-        queue->enqueueNDRangeKernel(*copyImage, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
-        event.wait();
-        */
+        
         depth->outUnlock();
         
     }
