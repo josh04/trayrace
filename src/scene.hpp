@@ -4,16 +4,10 @@
 #include <vector>
 #include <memory>
 
-#include "shape.hpp"
-#include "light.hpp"
+#include "types.hpp"
 
 using std::shared_ptr;
 using std::vector;
-
-namespace tr {
-	typedef shared_ptr<vector<shared_ptr<Shape>>> Shapes;
-	typedef shared_ptr<vector<shared_ptr<Light>>> Lights;
-}
 
 #include "SceneStruct.hpp"
 #include "sphere.hpp"
@@ -90,23 +84,32 @@ namespace tr {
 			lights->push_back(light2);
 		}
 
-		void moveCamera(point3d CameraLocation, int waistRotation, int headTilt, double horizontalFov, unsigned int width, unsigned int height) {
-			camera.reset();
-			camera = std::make_shared<Camera>(CameraLocation, waistRotation, headTilt, horizontalFov, width, height);
+		void moveCamera(point3d move, int waistRotation, int headTilt, double horizontalFov) {
+			camera->move(move, waistRotation, headTilt, horizontalFov);
 		}
         
         void moveObject() {
             //cuberot = cuberot+1;
             point3d newcubeloc = cubeloc*yRotation(cuberot*(M_PI/180));
-            cube->relocate(newcubeloc-cubeloc, 0.0, 0.0, 10);
+            //newcubeloc += point3d(5,0,0);
+            cube->move(newcubeloc-cubeloc, 0.0, 0.0, 10);
+            //cube->move(point3d(0), 0.0, 0.0, 10);
             cubeloc = newcubeloc;
         }
 
 		~Scene() {}
 
-		void snap(shared_ptr<Viewport> viewport, shared_ptr<Viewport> depthMap, shared_ptr<Viewport> normalMap, shared_ptr<Viewport> colourMap) {
-			camera->snap(viewport, depthMap, normalMap, colourMap, shapes, lights);
+		void preSnap(shared_ptr<Viewport> depthMap, shared_ptr<Viewport> normalMap, shared_ptr<Viewport> colourMap) {
+            camera->activateAll();
+			camera->preliminary_snap(depthMap, normalMap, colourMap, shapes, lights);
 		}
+        
+        void snap(uint8_t const * redraw, shared_ptr<Viewport> viewport) {
+            if (redraw != nullptr) {
+                camera->activateMap(redraw);
+            }
+            camera->final_snap(viewport, shapes, lights);
+        }
 
 	private:
         double cuberot = 5.0;

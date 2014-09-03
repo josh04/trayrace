@@ -109,7 +109,20 @@ namespace tr {
 		void setBackTexture(Texture tex) {
 			back.setTexture(std::move(tex));
 		}
+        
+        virtual void move(const point3d& newLocation) {
+            location += newLocation;
+        }
 
+        void move(const point3d& newLocation, const double endDimension, const double lengthDimension) {
+            move(newLocation);
+            up.move(endDimension);
+            down.move(endDimension);
+            front.move(lengthDimension);
+            back.move(lengthDimension);
+            left.move(lengthDimension);
+            right.move(lengthDimension);
+        }
 	private:
 		plane3d up, down, front, back, left, right;
 		double endDimension;

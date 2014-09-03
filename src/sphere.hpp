@@ -39,6 +39,15 @@ namespace tr {
 		unit3d normal(const point3d& pointonsurface) const {
 			return unit3d(pointonsurface - location);
 		}
+        
+        void move(const point3d& newLocation) {
+            location += newLocation;
+        }
+        
+        void move(const point3d& newLocation, const double newRadius) {
+            location += newLocation;
+            radius += newRadius;
+        }
 
 	private:
 		double radius;

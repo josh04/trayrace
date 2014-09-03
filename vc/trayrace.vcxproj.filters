@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Algebra">
       <UniqueIdentifier>{23abfaef-52d8-4811-b9c9-b7dc9aea7d86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Video Mush">
+      <UniqueIdentifier>{5689838f-54fb-4d87-82d3-84f20d0dc145}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\scene.hpp">
@@ -98,6 +101,24 @@
     </ClInclude>
     <ClInclude Include="..\src\checkerboard.hpp">
       <Filter>Source Files\Paints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\diffuseProcess.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\edgeThreshold.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\getDiscontinuities.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\trayraceCompose.hpp">
+      <Filter>Source Files\Video Mush</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\trayraceProcessor.hpp">
+      <Filter>Source Files\Video Mush</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\trayraceRedraw.hpp">
+      <Filter>Source Files\Video Mush</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

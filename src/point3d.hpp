@@ -8,6 +8,7 @@ using std::vector;
 
 namespace tr {
 	class unit3d;
+    
 	class point3d {
 	public:
 		point3d(double x = 0, double y = 0, double z = 0)
@@ -68,22 +69,19 @@ namespace tr {
 		
 	};
 
-	point3d operator+(point3d lhs, const point3d& rhs) {
-		lhs += rhs;
-		return lhs;
+	point3d operator+(const point3d& lhs, const point3d& rhs) {
+		return point3d(lhs.x+rhs.x, lhs.y+rhs.y, lhs.z+rhs.z);
 	}
 
-
-	point3d operator-(point3d lhs, const point3d& rhs) {
-		lhs -= rhs;
-		return lhs;
+	point3d operator-(const point3d& lhs, const point3d& rhs) {
+		return point3d(lhs.x-rhs.x, lhs.y-rhs.y, lhs.z-rhs.z);
 	}
 
-	point3d operator*(point3d lhs, const double& rhs) {
+	point3d operator*(const point3d& lhs, const double& rhs) {
 		return point3d(lhs.x*rhs, lhs.y*rhs, lhs.z*rhs);
 	}
 
-	point3d operator*(const double lhs, const point3d& rhs) {
+	point3d operator*(const double& lhs, const point3d& rhs) {
 		return rhs*lhs;
 	}
 

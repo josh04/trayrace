@@ -147,7 +147,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>c:\code\video-mush\src;G:\code\boost-trunk;G:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\video-mush\vc\x64\Release\bin\include;G:\code\boost-trunk;G:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -184,6 +184,12 @@
     <ClInclude Include="..\src\texture.hpp" />
     <ClInclude Include="..\src\tiffOutput.hpp" />
     <ClInclude Include="..\src\unit3d.hpp" />
+    <ClInclude Include="..\src\video-mush\diffuseProcess.hpp" />
+    <ClInclude Include="..\src\video-mush\edgeThreshold.hpp" />
+    <ClInclude Include="..\src\video-mush\getDiscontinuities.hpp" />
+    <ClInclude Include="..\src\video-mush\trayraceCompose.hpp" />
+    <ClInclude Include="..\src\video-mush\trayraceProcessor.hpp" />
+    <ClInclude Include="..\src\video-mush\trayraceRedraw.hpp" />
     <ClInclude Include="..\src\viewport.hpp" />
     <ClInclude Include="..\src\viewport8bit.hpp" />
     <ClInclude Include="..\src\viewportFloat.hpp" />
