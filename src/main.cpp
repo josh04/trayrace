@@ -144,16 +144,17 @@ int main(int argc, char** argv)
 #ifdef _WIN32
 	config.resourceDir = "./";
 	config.inputConfig.resourceDir = "./";
+	config.outputConfig.outputPath = "./output";
 #endif
 
 #ifdef __APPLE__
     NSString * frDir = [NSString stringWithFormat:@"%@/%@", @".", @"Video Mush.framework"];
 	NSString * resDir = [[[NSBundle bundleWithPath:frDir] resourcePath] stringByAppendingString:@"/"];
 	config.resourceDir = [resDir UTF8String];
-    config.inputConfig.resourceDir =[resDir UTF8String];
+	config.inputConfig.resourceDir =[resDir UTF8String];
+	config.outputConfig.outputPath = "/Users/josh04/trayrace";
 #endif
 
-    config.outputConfig.outputPath = "/Users/josh04/trayrace";
     config.outputConfig.outputName = "trayrace.mp4";
     
 	// run function in thread

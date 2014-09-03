@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "trayrace", "trayrace.vcxproj", "{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "trayrace-gui", "trayrace-gui\trayrace-gui.csproj", "{306CD812-975A-4051-B27D-A298D5A11F5D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "compressor", "..\..\video-mush\vc\compressor.vcxproj", "{5719BE3D-C333-443F-B14E-BB6566F4E65A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libazure", "..\..\jon-player\libazure\libazure.vcxproj", "{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +69,20 @@ Global
 		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|Win32.Build.0 = Release|Win32
 		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|x64.ActiveCfg = Release|x64
 		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|x64.Build.0 = Release|x64
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Win32.Build.0 = Debug|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|x64.ActiveCfg = Debug|x64
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|x64.Build.0 = Debug|x64
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Any CPU.ActiveCfg = Release|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Win32.ActiveCfg = Release|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Win32.Build.0 = Release|Win32
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|x64.ActiveCfg = Release|x64
+		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -51,10 +51,10 @@ public:
         depthDoubler = make_shared<mush::doubleBuffer>();
         depthDoubler->init(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
         
-        depthExposure = make_shared<fixedExposureProcess>(-8.0f);
+        depthExposure = make_shared<mush::fixedExposureProcess>(-8.0f);
         depthExposure->init(context, depthDoubler->getFirst());
         
-        normalExposure = make_shared<fixedExposureProcess>(darken);
+		normalExposure = make_shared<mush::fixedExposureProcess>(darken);
         normalExposure->init(context, buffers[2]);
         
         motionDoubler = make_shared<mush::doubleBuffer>();
@@ -63,7 +63,7 @@ public:
         motionDoubler2 = make_shared<mush::doubleBuffer>();
         motionDoubler2->init(std::dynamic_pointer_cast<mush::imageBuffer>(motionDoubler->getFirst()));
         
-        motionExposure = make_shared<fixedExposureProcess>(-8.0f);
+		motionExposure = make_shared<mush::fixedExposureProcess>(-8.0f);
         motionExposure->init(context, motionDoubler2->getSecond());
         
         // and send back the redrawmap
@@ -82,7 +82,7 @@ public:
         
         inputBuffer = buffers[0];
         
-        mainExposure = make_shared<fixedExposureProcess>(darken);
+		mainExposure = make_shared<mush::fixedExposureProcess>(darken);
         mainExposure->init(context, inputBuffer);
         
         mainDoubler = make_shared<mush::doubleBuffer>();
