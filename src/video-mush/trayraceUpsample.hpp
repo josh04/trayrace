@@ -114,29 +114,29 @@ public:
         spatialUpsample->setArg(5, *map);
         
         // BLOCK 'O' FIVE /*FOUR*/
-        
-        spatialUpsample->setArg(6, 0);
-        spatialUpsample->setArg(7, 0);
+
+        spatialUpsample->setArg(6, (char)0);
+        spatialUpsample->setArg(7, (char)0);
+        queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
+        event.wait();
+		
+		spatialUpsample->setArg(6, (char)-1);
+		spatialUpsample->setArg(7, (char)0);
         queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
-        spatialUpsample->setArg(6, -1);
-        spatialUpsample->setArg(7, 0);
+		spatialUpsample->setArg(6, (char)1);
+		spatialUpsample->setArg(7, (char)0);
         queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
-        spatialUpsample->setArg(6, 1);
-        spatialUpsample->setArg(7, 0);
+		spatialUpsample->setArg(6, (char)0);
+		spatialUpsample->setArg(7, (char)-1);
         queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
-        spatialUpsample->setArg(6, 0);
-        spatialUpsample->setArg(7, -1);
-        queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
-        event.wait();
-        
-        spatialUpsample->setArg(6, 0);
-        spatialUpsample->setArg(7, 1);
+		spatialUpsample->setArg(6, (char)0);
+		spatialUpsample->setArg(7, (char)1);
         queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         

@@ -189,7 +189,7 @@ namespace tr {
                 }
                 //colour = colour / (double)(_hSubsample * _vSubsample);
                 props.depth = props.depth / (double)(_hSubsample * _vSubsample);
-                props.normal = props.normal / (double)(_hSubsample * _vSubsample);
+                props.normal = unit3d(props.normal / (double)(_hSubsample * _vSubsample));
                 props.movement = props.movement / (double)(_hSubsample * _vSubsample);
 //                props.movement.x = x - props.movement.x;
 //                props.movement.y = y - props.movement.y;
@@ -254,8 +254,14 @@ namespace tr {
         
         
         const static uint32_t _hSubsample = 2, _vSubsample = 2;
+
+#ifdef __APPLE__
         const static uint32_t _numThreads = 8;
-        
+#endif
+#ifdef _WIN32
+		const static uint32_t _numThreads = 4;
+#endif
+
         uint8_t const * map = nullptr;
         
 		double n = 0;

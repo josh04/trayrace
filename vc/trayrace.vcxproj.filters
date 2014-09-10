@@ -102,15 +102,6 @@
     <ClInclude Include="..\src\checkerboard.hpp">
       <Filter>Source Files\Paints</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\video-mush\diffuseProcess.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\video-mush\edgeThreshold.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\video-mush\getDiscontinuities.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\video-mush\trayraceCompose.hpp">
       <Filter>Source Files\Video Mush</Filter>
     </ClInclude>
@@ -120,10 +111,25 @@
     <ClInclude Include="..\src\video-mush\trayraceRedraw.hpp">
       <Filter>Source Files\Video Mush</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\video-mush\getDiscontinuities.hpp">
+      <Filter>Source Files\Video Mush</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\diffuseProcess.hpp">
+      <Filter>Source Files\Video Mush</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\edgeThreshold.hpp">
+      <Filter>Source Files\Video Mush</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\video-mush\trayraceUpsample.hpp">
+      <Filter>Source Files\Video Mush</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\video-mush\trayraceProcessor.cpp">
+      <Filter>Source Files\Video Mush</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

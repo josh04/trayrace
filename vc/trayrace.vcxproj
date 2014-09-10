@@ -109,14 +109,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\video-mush\vc\x64\Debug\bin\include;G:\code\boost-trunk;G:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\trayrace\vc\x64\Debug\bin\include;G:\code\boost-trunk;G:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\lib\x64;C:\code\video-mush\vc\x64\Debug\bin;G:\code\boost-trunk\lib\x64;G:\code\tiff-4.0.3\libtiff;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libtiff_i.lib;compressor.lib;opencl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\lib\x64;G:\code\boost-trunk\lib\x64;G:\code\tiff-4.0.3\libtiff;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libtiff_i.lib;opencl.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,7 +147,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\video-mush\vc\x64\Release\bin\include;G:\code\boost-trunk;G:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\trayrace\vc\x64\Release\bin\include;G:\code\boost-trunk;G:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\video-mush\trayraceProcessor.cpp" />
     <ClInclude Include="..\src\checkerboard.hpp" />
     <ClInclude Include="..\src\paint.hpp" />
   </ItemGroup>
@@ -190,6 +191,7 @@
     <ClInclude Include="..\src\video-mush\trayraceCompose.hpp" />
     <ClInclude Include="..\src\video-mush\trayraceProcessor.hpp" />
     <ClInclude Include="..\src\video-mush\trayraceRedraw.hpp" />
+    <ClInclude Include="..\src\video-mush\trayraceUpsample.hpp" />
     <ClInclude Include="..\src\viewport.hpp" />
     <ClInclude Include="..\src\viewport8bit.hpp" />
     <ClInclude Include="..\src\viewportFloat.hpp" />
