@@ -75,7 +75,7 @@ namespace tr {
             return colour;
         }
         
-        const Light::rgb preliminary_fire(Shapes shapes, Lights lights, const motion3d& cameraMotion, returnProps &reProps) {
+        const Light::rgb preliminary_fire(Shapes& shapes, Lights& lights, const motion3d& cameraMotion, returnProps &reProps) {
             rayProps props;
             fire_primary(shapes, ray, props);
             Light::rgb colour(0);
@@ -106,7 +106,7 @@ namespace tr {
             return colour;
         }
 
-		const Light::rgb final_fire(Shapes shapes, Lights lights, const motion3d& cameraMotion, returnProps &reProps) const {
+		const Light::rgb final_fire(Shapes& shapes, Lights& lights, const motion3d& cameraMotion, returnProps &reProps) const {
             rayProps props;
             Light::rgb colour(0);
             if (isCached) {

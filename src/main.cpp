@@ -18,10 +18,24 @@
 #include "tiffOutput.hpp"
 
 #include "video-mush/trayraceProcessor.hpp"
+#include "video-mush/trayraceRedraw.hpp"
 
 using namespace tr;
 using std::make_shared;
 
+
+void runLog(std::atomic_int * over) {
+	const uint64_t size = 4096;
+	char output[size];
+	while (!(*over)) {
+		boost::this_thread::sleep_for(boost::chrono::duration<int64_t, boost::micro>(2));
+		bool set = false;
+		set = getLog(output, size);
+		if (set) {
+			std::cout << output << std::endl;
+		}
+	}
+};
 
 void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector<std::shared_ptr<inputMethods>> inputPtrs, std::shared_ptr<trayraceProcessor> vmp) {
 	Scene scene{};
@@ -171,8 +185,18 @@ int main(int argc, char** argv)
     
 	std::thread * thread = new std::thread(&doTrayRaceThread, sconfig, &stop, inputPtrs, vmp);
     
+    std::atomic<int> over(0);
+	
+//	std::thread logThread(&runLog, &over);
+
     videoMushExecute(vmp);
+	over++;
     
     stop = true;
-    thread->join();
+//    if (logThread->joinable()) {
+//        logThread->join();
+//    }
+    if (thread->joinable()) {
+        thread->join();
+    }
 }

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9E6574CA1967270A000F7D46 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E6029FF1963690A00F42D3C /* main.cpp */; };
 		9EA6774419A3AD0A00BC23E4 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA6774319A3AD0A00BC23E4 /* OpenCL.framework */; };
+		9EAA1AEE19BE3EEF000AD7AD /* trayraceProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAA1AEB19BE3C83000AD7AD /* trayraceProcessor.cpp */; };
 		9EC4477F1985B67C004537F0 /* Video Mush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC4477E1985B67C004537F0 /* Video Mush.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +62,8 @@
 		9E64544919A3A550007E9D6A /* trayraceRedraw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trayraceRedraw.hpp; path = "../src/video-mush/trayraceRedraw.hpp"; sourceTree = "<group>"; };
 		9EA6774319A3AD0A00BC23E4 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 		9EA6774619A4CA0C00BC23E4 /* trayraceCompose.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = trayraceCompose.hpp; path = "../src/video-mush/trayraceCompose.hpp"; sourceTree = "<group>"; };
+		9EAA1AEB19BE3C83000AD7AD /* trayraceProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trayraceProcessor.cpp; path = "../src/video-mush/trayraceProcessor.cpp"; sourceTree = SOURCE_ROOT; };
+		9EAD22C619BC9B35008806F3 /* trayraceUpsample.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = trayraceUpsample.hpp; path = "../src/video-mush/trayraceUpsample.hpp"; sourceTree = "<group>"; };
 		9EC4477E1985B67C004537F0 /* Video Mush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Video Mush.framework"; path = "../../../Library/Developer/Xcode/DerivedData/trayrace-ectwjrnhmycigocvbzryfrszvzzz/Build/Products/Debug/Video Mush.framework"; sourceTree = "<group>"; };
 		9EC44783199A27A0004537F0 /* types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = types.hpp; path = ../src/types.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +132,8 @@
 				9E64544819A3A550007E9D6A /* getDiscontinuities.hpp */,
 				9E64544919A3A550007E9D6A /* trayraceRedraw.hpp */,
 				9EA6774619A4CA0C00BC23E4 /* trayraceCompose.hpp */,
+				9EAD22C619BC9B35008806F3 /* trayraceUpsample.hpp */,
+				9EAA1AEB19BE3C83000AD7AD /* trayraceProcessor.cpp */,
 			);
 			name = "video mush";
 			sourceTree = "<group>";
@@ -213,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EAA1AEE19BE3EEF000AD7AD /* trayraceProcessor.cpp in Sources */,
 				9E6574CA1967270A000F7D46 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

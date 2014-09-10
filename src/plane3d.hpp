@@ -32,14 +32,16 @@ namespace tr {
 		}
 
 		virtual bool intersection(const line3d& ray, double &distance, Light::rgb &colour) const {
-			double t = -((ray.point - location).dot(norm)) / (ray.direction.dot(norm));
+            
+			const double t = -((ray.point - location).dot(norm)) / (ray.direction.dot(norm));
+            
 			if (t < 0) {
 				return false;
 			}
+            
 			distance = t;
 			
-			point3d spot = ray.getPoint(t);
-			spot = spot*coordTrans;
+			point3d spot = ray.getPoint(t)*coordTrans;
 
 			colour = texture->colour(spot.z, spot.y);
 

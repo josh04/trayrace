@@ -9,18 +9,26 @@
 #ifndef video_mush_trayraceProcessor_hpp
 #define video_mush_trayraceProcessor_hpp
 
+namespace mush {
+    class imageProcess;
+    class imageBuffer;
+    class ringBuffer;
+    class integerMapProcess;
+    class frameStepper;
+    class imageProcessor;
+}
+
+class edgeThreshold;
+class diffuseProcess;
+class getDiscontinuities;
+class trayraceRedraw;
+class trayraceUpsample;
+class trayraceCompose;
+
 #include <Video Mush/opencl.hpp>
-#include <Video Mush/fixedExposureProcess.hpp>
-#include <Video Mush/guiExposureProcess.hpp>
-#include <Video Mush/nullProcess.hpp>
-#include <Video Mush/doubleBuffer.hpp>
-#include <Video Mush/laplaceProcess.hpp>
-#include <Video Mush/delayProcess.hpp>
-#include "edgeThreshold.hpp"
-#include "diffuseProcess.hpp"
-#include "getDiscontinuities.hpp"
-#include "trayraceRedraw.hpp"
-#include "trayraceCompose.hpp"
+//#define _PROFILE 3
+#include <Video Mush/profile.hpp>
+
 #include <Video Mush/imageProcessor.hpp>
 #include <thread>
 
@@ -33,131 +41,9 @@ public:
     
 	~trayraceProcessor() {}
     
-    void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers) {
-        profileInit();
-        
-        if (buffers.size() < 1) {
-            putLog("No buffers at encoder");
-        }
-        
-        steppers.push_back(std::make_shared<mush::frameStepper>());
-        
-        // take the three prelim buffers first
-        
-        depthDoubler = make_shared<mush::doubleBuffer>();
-        depthDoubler->init(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
-        
-        depthExposureDoubler = make_shared<mush::doubleBuffer>();
-        depthExposureDoubler->init(depthDoubler->getFirst());
-        
-        motionDoubler = make_shared<mush::doubleBuffer>();
-        motionDoubler->init(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
-     
-        // and send back the redrawmap
-        
-        depthDelay = make_shared<mush::delayProcess>();
-        depthDelay->init(context, depthDoubler->getSecond());
-        
-        discontinuities = make_shared<getDiscontinuities>();
-        std::vector<std::shared_ptr<mush::ringBuffer>> motBuff;
-        motBuff.push_back(motionDoubler->getFirst());
-        motBuff.push_back(depthDelay);
-        discontinuities->init(context, motBuff);
-        
-        redraw = make_shared<trayraceRedraw>();
-        redraw->init(context, discontinuities);
-        
-        inputBuffer = buffers[0];
-        
-
-        mainExposure = make_shared<mush::fixedExposureProcess>(darken);
-        mainExposure->init(context, inputBuffer);
-        
-        compose = make_shared<trayraceCompose>();
-        std::vector<std::shared_ptr<mush::ringBuffer>> composeBuff;
-        composeBuff.push_back(mainExposure);
-        composeBuff.push_back(redraw);
-        composeBuff.push_back(motionDoubler->getSecond());
-        compose->init(context, composeBuff);
-        
-        // then we can get the main image and start workin'
-
-        laplace = make_shared<laplaceProcess>();
-        laplace->init(context, depthExposureDoubler->getFirst());
-        
-        edge = make_shared<edgeThreshold>();
-        std::vector<std::shared_ptr<mush::ringBuffer>> edgeBuff;
-        edgeBuff.push_back(depthExposureDoubler->getSecond());
-        edgeBuff.push_back(laplace);
-        edge->init(context, edgeBuff);
-        
-        diffuse = make_shared<diffuseProcess>();
-        diffuse->init(context, edge);
-
-        _guiBuffers.push_back(compose);
-        _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
-        _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
-        _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[2]));
-        _guiBuffers.push_back(laplace);
-        _guiBuffers.push_back(edge);
-        _guiBuffers.push_back(diffuse);
-        _guiBuffers.push_back(discontinuities);
-        _guiBuffers.push_back(redraw);
-        _guiBuffers.push_back(mainExposure);
-        
-        
-        
-		_nulls.push_back(diffuse);
-		_nulls.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[2]));
-//        _nulls.push_back(colourExposure);
-//        _nulls.push_back(redraw);
-        
-        
-		queue = context->getQueue();
-        
-        //_guiBuffers.push_back(imageBuffer);
-    }
+    void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers);
     
-	void doFrame() {
-        profile.start();
-        
-        profile.inReadStart();
-        profile.inReadStop();
-        
-        profile.writeToGPUStart();
-        profile.writeToGPUStop();
-        
-        profile.executionStart();
-        
-        depthDelay->process();
-//        steppers[1]->process();
-        steppers[0]->process();
-        discontinuities->process();
-        redraw->process();
-        
-        mainExposure->process();
-        compose->process();
-        laplace->process();
-        edge->process();
-        diffuse->process();
-        
-        profile.executionStop();
-        
-        profile.writeStart();
-        for (auto img : _nulls) {
-            img->outUnlock(); // removes the need for nullers; hacky hacky hack hack
-        }
-        profile.writeStop();
-        
-        profile.readFromGPUStart();
-        profile.readFromGPUStop();
-        
-        profile.waitStart();
-        profile.waitStop();
-        
-        profile.stop();
-        profile.frameReport();
-	}
+	void doFrame();
     
 	void profileInit() {
 		profile.init();
@@ -167,82 +53,34 @@ public:
 		profile.totalReport();
 	}
     
-	static const std::vector<std::string> listKernels() {
-		std::vector<std::string> kernels;
-		return kernels;
-	}
+	static const std::vector<std::string> listKernels();
     
-    std::vector<std::shared_ptr<mush::ringBuffer>> getBuffers() {
-        std::vector<std::shared_ptr<mush::ringBuffer>> buffers;
-        buffers.push_back(compose);
-        return buffers;
-    }
+    std::vector<std::shared_ptr<mush::ringBuffer>> getBuffers();
+    std::vector<std::shared_ptr<mush::imageBuffer>> getGuiBuffers();
+    std::vector<std::shared_ptr<mush::frameStepper>> getFrameSteppers();
     
-    std::vector<std::shared_ptr<mush::imageBuffer>> getGuiBuffers() {
-        const std::vector<std::shared_ptr<mush::imageBuffer>> buffs = _guiBuffers;
-        _guiBuffers.clear();
-        return buffs;
-    }
-    
-    std::vector<std::shared_ptr<mush::frameStepper>> getFrameSteppers() {
-        return steppers;
-    }
-    
-    void go() {
-        while (inputBuffer->good()) {
-			doFrame();
-		}
-        
-        if (mainExposure != nullptr) {
-            mainExposure->release();
-        }
-        
-        if (edge != nullptr) {
-            edge->release();
-        }
-        
-        if (laplace != nullptr) {
-            laplace->release();
-        }
-        
-        if (discontinuities != nullptr) {
-            discontinuities->release();
-        }
-        
-        if (redraw != nullptr) {
-            redraw->release();
-        }
-        
-        if (compose != nullptr) {
-            compose->release();
-        }
-        
-    }
+    void go();
                                   
-    std::shared_ptr<trayraceRedraw> getRedraw() {
-        return std::dynamic_pointer_cast<trayraceRedraw>(redraw);
-    }
+    std::shared_ptr<trayraceRedraw> getRedraw();
     
-    //    std::shared_ptr<guiProcess> gui = nullptr;
 private:
 	shared_ptr<mush::opencl> context = nullptr;
 	shared_ptr<mush::ringBuffer> inputBuffer = nullptr;
     
-    shared_ptr <mush::imageProcess> laplace  = nullptr;
-    shared_ptr <mush::imageProcess> edge = nullptr;
-    shared_ptr <mush::imageProcess> diffuse = nullptr;
+    shared_ptr <mush::imageProcess> depthLaplace  = nullptr;
+    shared_ptr <mush::imageProcess> depthEdgeSamples = nullptr;
+    shared_ptr <mush::imageProcess> depthReconstruction = nullptr;
+
+    shared_ptr <mush::imageProcess> motionLaplace  = nullptr;
+    shared_ptr <mush::imageProcess> motionEdgeSamples = nullptr;
+    shared_ptr <mush::imageProcess> motionReconstruction = nullptr;
     
-    shared_ptr <mush::imageProcess> mainExposure  = nullptr;
     shared_ptr <mush::imageProcess> depthDelay  = nullptr;
     
     shared_ptr <mush::integerMapProcess> discontinuities  = nullptr;
     shared_ptr <mush::integerMapProcess> redraw  = nullptr;
+    shared_ptr <mush::imageProcess> upsample  = nullptr;
     shared_ptr <mush::imageProcess> compose  = nullptr;
-    
-    std::shared_ptr<mush::doubleBuffer> motionDoubler = nullptr;
-    std::shared_ptr<mush::doubleBuffer> motionDoubler2 = nullptr;
-    std::shared_ptr<mush::doubleBuffer> depthDoubler = nullptr;
-    std::shared_ptr<mush::doubleBuffer> depthExposureDoubler = nullptr;
     
 	std::vector<std::shared_ptr<mush::imageBuffer>> _nulls;
     

@@ -28,7 +28,7 @@ namespace tr {
 	class Camera {
 	public:
 		Camera(point3d location, double theta, double phi, double horizontalFOV, unsigned int width, unsigned int height)
-			: location(location), width(width), height(height), horizontalFOV(horizontalFOV), yRotate(yRotation(theta*(M_PI/180.0))), zRotate(zRotation(phi*(M_PI/180.0))) {
+			: location(location), width(width), height(height), horizontalFOV(horizontalFOV), yRotate(yRotation(theta*(M_PI/180.0))), zRotate(zRotation(phi*(M_PI/180.0))), percentBoundary((width*height) / 100.0) {
                 
             for (uint32 j = 0; j < height * _vSubsample; j = j+_vSubsample) {
                 for (uint32 i = 0; i < width * _hSubsample; ++i) {
@@ -69,13 +69,18 @@ namespace tr {
 			unit3d u = up.cross(w);
 			unit3d v = w.cross(u);
             
-            double ratio = static_cast<double>(height) / static_cast<double>(width);
-			for (uint32 j = 0; j < height * _vSubsample; j = j+_vSubsample) {
-				for (uint32 i = 0; i < width * _hSubsample; ++i) {
+            const int64_t subHeight = height *_vSubsample;
+            const int64_t subWidth = width * _hSubsample;
+            const point3d gazen = gaze*n;
+            
+            
+            const point3d vratio = v * static_cast<double>(height) / static_cast<double>(width);
+			for (uint32 j = 0; j < subHeight; j = j+_vSubsample) {
+				for (uint32 i = 0; i < subWidth; ++i) {
                     
                     for (uint32 k = 0; k < _vSubsample; ++k) {
-                        unit3d dir = gaze*n + v*ratio*(-1.0 + 2*((0.5 + j+k) / (height * _vSubsample))) + u*(-1.0 + 2*((0.5 + i) / (width * _hSubsample)));
-                        cells[j*width*_hSubsample + i*_vSubsample + k].move(line3d(location, dir), u, v, horizontalFOV);
+                        unit3d dir = gazen + vratio*(-1.0 + 2*((0.5 + j+k) / (subHeight))) + u*(-1.0 + 2*((0.5 + i) / (subWidth)));
+                        cells[j*subWidth + i*_vSubsample + k].move(line3d(location, dir), u, v, horizontalFOV);
                     }
 
 				}
@@ -139,14 +144,16 @@ namespace tr {
         }
         
         void activateMap(uint8_t const * map) {
-            for (int64_t i = 0; i < cells.size()/(_hSubsample*_vSubsample); ++i) {
+            const int subs = _hSubsample*_vSubsample;
+            const int64_t size = cells.size()/(subs);
+            for (int64_t i = 0; i < size; ++i) {
                 if (map[i] == 1) {
-                    for (int k = 0; k < (_hSubsample*_vSubsample); ++k) {
-                        cells[i*(_hSubsample*_vSubsample)+k].activate();
+                    for (int k = 0; k < (subs); ++k) {
+                        cells[i*(subs)+k].activate();
                     }
                 } else {
-                    for (int k = 0; k < (_hSubsample*_vSubsample); ++k) {
-                        cells[i*(_hSubsample*_vSubsample)+k].deactivate();
+                    for (int k = 0; k < (subs); ++k) {
+                        cells[i*(subs)+k].deactivate();
                     }
 
                 }
@@ -165,9 +172,6 @@ namespace tr {
 			uint32_t percent = 0;
             
 			for (int64_t i = 0; i < num; ++i) {
-                if (useProfile) {
-                    profileStart();
-                }
                 
                 Light::rgb colour(0);
                 Cell::returnProps props;
@@ -175,7 +179,7 @@ namespace tr {
                 for (int k = 0; k < _hSubsample * _vSubsample; ++k) {
                     if (cells[(start+i) * _hSubsample * _vSubsample + k].isActive()) {
                         Cell::returnProps tempProps;
-                        colour += cells[(start+i) * _hSubsample * _vSubsample + k].preliminary_fire(shapes, lights, motion, tempProps);
+                        colour += cells[(start+i) * _hSubsample * _vSubsample + k].preliminary_fire(std::ref(shapes), std::ref(lights), motion, tempProps);
                         props.depth += tempProps.depth;
                         props.normal += tempProps.normal;
                         tempProps.movement.x = tempProps.movement.x / _hSubsample;
@@ -200,6 +204,10 @@ namespace tr {
                     profileStop(count, oldPercentile, percent);
                 }
 			}
+            
+            if (useProfile) {
+                profile.stop();
+            }
 		}
         
 		void final_subSnap(int64_t start, int64_t num, shared_ptr<Viewport> viewport,
@@ -209,9 +217,6 @@ namespace tr {
 			uint32_t percent = 0;
             
 			for (int64_t i = 0; i < num; ++i) {
-                if (useProfile) {
-                    profileStart();
-                }
                 
                 Light::rgb colour(0);
                 Cell::returnProps props;
@@ -219,7 +224,7 @@ namespace tr {
                 for (int k = 0; k < _hSubsample * _vSubsample; ++k) {
                     if (cells[(start+i) * _hSubsample * _vSubsample + k].isActive()) {
                         Cell::returnProps tempProps;
-                        colour += cells[(start+i) * _hSubsample * _vSubsample + k].final_fire(shapes, lights, motion, tempProps);
+                        colour += cells[(start+i) * _hSubsample * _vSubsample + k].final_fire(std::ref(shapes), std::ref(lights), motion, tempProps);
                     }
                 }
                 colour = colour / (double)(_hSubsample * _vSubsample);
@@ -232,19 +237,21 @@ namespace tr {
                     profileStop(count, oldPercentile, percent);
                 }
 			}
+            
+            if (useProfile) {
+                profile.stop();
+            }
 		}
         
-        void profileStart() {
-            profile.start();
-        }
-        
         void profileStop(std::atomic_long &count, int64_t &oldPercentile, uint32_t &percent) {
-            if ((count - oldPercentile) > (width*height) / 100.0) {
+            if ((count - oldPercentile) > percentBoundary) {
+                profile.stop();
                 std::cout << "Processing pixel " << (count) << " of " << width*height << " " << ++percent << "% (" << profile.total / 1e9 << "s elapsed) \r";
                 oldPercentile = count;
+                profile.start();
             }
-            profile.stop();
         }
+        
         
         const static uint32_t _hSubsample = 2, _vSubsample = 2;
         const static uint32_t _numThreads = 8;
@@ -255,6 +262,7 @@ namespace tr {
         double horizontalFOV = 0;
         point3d location;
 		const unsigned int width = 0, height = 0;
+        const unsigned int percentBoundary = 0;
 		vector<Cell> cells;
         
         matrix3d yRotate;

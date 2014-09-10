@@ -17,6 +17,7 @@ namespace tr {
         left(length, length/2.0, -90, 0, 0, Light::rgb(0.0, 0.9, 0.5)),
         right(length, length/2.0, 90, 0, 0, Light::rgb(0.0, 0.9, 0.5))
         {
+            radiusToCross = sqrt(3.0) * length;
             const yRotation yrot(theta * (M_PI / 180.0));
             const zRotation zrot(phi * (M_PI / 180.0));
             orthonormalUp = point3d(0, 1, 0)*zrot*yrot;
@@ -34,6 +35,15 @@ namespace tr {
 		}
         
 		virtual bool intersection(const line3d& ray, double &distance, Light::rgb &colour) const {
+            
+            const point3d x2 = ray.direction + ray.point;
+            
+            const double closestDistance = ( (location - ray.point).cross(location - x2 ) ).magnitude() / (x2 - ray.point).magnitude();
+            
+            if (closestDistance > radiusToCross) {
+                return false;
+            }
+            
             const line3d rebaseRay((ray.point-location)*coordTrans, ray.direction*coordTrans);
             //const line3d rebaseRay = ray;
             distance = 1e9;
@@ -189,6 +199,7 @@ namespace tr {
         
         coordTransform coordTrans;
         
+        double radiusToCross = 0.0;
 	};
 }
 #endif;
