@@ -67,19 +67,19 @@ public:
     
     void process() {
         inLock();
-        cl::Image2D * input = (cl::Image2D *)buffer->outLock();
+        cl::Image2D const * input = buffer->imageOutLock();
         if (input == nullptr) {
             release();
             return;
         }
         copy->setArg(0, *input);
-        copy->setArg(1, *((cl::Image2D *)_getMem(0)));
+        copy->setArg(1, *_getImageMem(0));
         queue->enqueueNDRangeKernel(*copy, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
         buffer->outUnlock();
         
-        push_seq((cl::Image2D *)_getMem(0), first, first_width, first_height);
+        push_seq(_getImageMem(0), first, first_width, first_height);
         push_seq(first, second, second_width, second_height);
         push_seq(second, third, third_width, third_height);
         push_seq(third, fourth, fourth_width, fourth_height);
@@ -90,7 +90,7 @@ public:
         pull_seq(fourth, third, fourth_width, fourth_height, third_width, third_height);
         pull_seq(third, second, third_width, third_height, second_width, second_height);
         pull_seq(second, first, second_width, second_height, first_width, first_height);
-        pull_seq(first, (cl::Image2D *)_getMem(0), first_width, first_height, _width, _height);
+        pull_seq(first, _getImageMem(0), first_width, first_height, _width, _height);
         /*
         copy->setArg(0, *fourth);
         copy->setArg(1, *((cl::Image2D *)mem[0]));
@@ -139,8 +139,14 @@ private:
     }
     
     cl::CommandQueue * queue = nullptr;
-    cl::Kernel * copy = nullptr, * push = nullptr, * pull = nullptr;
-    cl::Kernel * pull_copy = nullptr, * pull_diag = nullptr, * pull_horiz = nullptr;
+    
+    cl::Kernel * copy = nullptr;
+    cl::Kernel * push = nullptr;
+    cl::Kernel * pull = nullptr;
+    
+    cl::Kernel * pull_copy = nullptr;
+    cl::Kernel * pull_diag = nullptr;
+    cl::Kernel * pull_horiz = nullptr;
     
     cl::Image2D * first = nullptr, * first_copy = nullptr,
                 * second = nullptr, * second_copy = nullptr,

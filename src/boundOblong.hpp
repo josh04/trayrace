@@ -44,6 +44,18 @@ namespace tr {
 			} else {
 				left.intersection(line, zintp, zCol);
 			}
+            
+            if (xintp < 1e-5) {
+                xintp = 1e9;
+            }
+            
+            if (yintp < 1e-5) {
+                yintp = 1e9;
+            }
+            
+            if (zintp < 1e-5) {
+                zintp = 1e9;
+            }
 
 			if (xintp > yintp) {
 				intersect = yintp;

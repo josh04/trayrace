@@ -29,6 +29,7 @@ public:
         historyBuffer = context->getKernel("historyBuffer");
         spatiotemporalUpsample = context->getKernel("spatiotemporalUpsample");
         fromRay = context->getKernel("fromRay");
+        spatialClear = context->getKernel("spatialClear");
         
         if (buffers.size() < 2) {
             putLog("compose kernel: not enough buffers");
@@ -64,23 +65,28 @@ public:
         
         addItem(context->floatImage(_width, _height));
         
-        fromRay->setArg(0, *(cl::Image2D *)_getMem(0));
+        fromRay->setArg(0, *_getImageMem(0));
         
-        spatiotemporalUpsample->setArg(0, *(cl::Image2D *)_getMem(0));
+        spatiotemporalUpsample->setArg(0, *_getImageMem(0));
         spatiotemporalUpsample->setArg(1, *historyFrame);
         
         historyBuffer->setArg(0, *historyFrame);
-        historyBuffer->setArg(1, *(cl::Image2D *)_getMem(0));
-        historyBuffer->setArg(2, *(cl::Image2D *)_getMem(0));
+        historyBuffer->setArg(1, *_getImageMem(0));
+        historyBuffer->setArg(2, *_getImageMem(0));
         
-//        fromCache->setArg(0, *(cl::Image2D *)_getMem(0));
+        queue = context->getQueue();
+        cl::Event event;
+        spatialClear->setArg(0, *historyFrame);
+        queue->enqueueNDRangeKernel(*spatialClear, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
+        event.wait();
+        
+//        fromCache->setArg(0, *_getImageMem(0)));
 //        fromCache->setArg(1, *previousFrame);
         
-//        copyImage->setArg(0, *(cl::Image2D *)_getMem(0));
+//        copyImage->setArg(0, *_getImageMem(0)));
 //        copyImage->setArg(1, *previousFrame);
         
         
-        queue = context->getQueue();
     }
     
     void process() {
@@ -95,19 +101,19 @@ public:
             return;
         }
         
-        cl::Image2D * ray = (cl::Image2D *)rays->outLock();
+        cl::Image2D const * ray = rays->imageOutLock();
         if (ray == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D * m = (cl::Image2D *)motion->outLock();
+        cl::Image2D const * m = motion->imageOutLock();
         if (m == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D * up = (cl::Image2D *)upsample->outLock();
+        cl::Image2D const * up = upsample->imageOutLock();
         if (up == nullptr) {
             release();
             return;
@@ -126,8 +132,8 @@ public:
         upsample->outUnlock();
         motion->outUnlock();
         
-        queue->enqueueNDRangeKernel(*fromRay, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
-        event.wait();
+        //queue->enqueueNDRangeKernel(*fromRay, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
+        //event.wait();
         
         rays->outUnlock();
         maps->outUnlock();
@@ -143,6 +149,7 @@ private:
     cl::Kernel * historyBuffer = nullptr;
     cl::Kernel * spatiotemporalUpsample = nullptr;
     cl::Kernel * fromRay = nullptr;
+    cl::Kernel * spatialClear = nullptr;
     
     cl::Image2D * historyFrame = nullptr;
     

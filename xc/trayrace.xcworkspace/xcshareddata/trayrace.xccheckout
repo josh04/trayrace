@@ -10,33 +10,45 @@
 	<string>trayrace</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>60B1DB72-A5EE-44B1-92B1-6216313952BB</key>
+		<key>2123600CCA56472BAED125DFED422986F1D2558B</key>
 		<string>ssh://github.com/josh04/video-mush.git</string>
-		<key>FE513570-EC01-4EDC-ACE3-6A8B089117DE</key>
+		<key>A84A7C8A29ED0A2CD14464A239CBC84F83DE7723</key>
 		<string>ssh://github.com/josh04/trayrace.git</string>
+		<key>FBD39F0D58D7F42B74C27E4178399CF66E880087</key>
+		<string>bitbucket.org:afinetapestry/libazure.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>xc/trayrace.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>60B1DB72-A5EE-44B1-92B1-6216313952BB</key>
+		<key>2123600CCA56472BAED125DFED422986F1D2558B</key>
 		<string>../../../video-mush</string>
-		<key>FE513570-EC01-4EDC-ACE3-6A8B089117DE</key>
+		<key>A84A7C8A29ED0A2CD14464A239CBC84F83DE7723</key>
 		<string>../..</string>
+		<key>FBD39F0D58D7F42B74C27E4178399CF66E880087</key>
+		<string>../../../libazure</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/josh04/trayrace.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>FE513570-EC01-4EDC-ACE3-6A8B089117DE</string>
+	<string>A84A7C8A29ED0A2CD14464A239CBC84F83DE7723</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>FE513570-EC01-4EDC-ACE3-6A8B089117DE</string>
+			<string>FBD39F0D58D7F42B74C27E4178399CF66E880087</string>
+			<key>IDESourceControlWCCName</key>
+			<string>libazure</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>A84A7C8A29ED0A2CD14464A239CBC84F83DE7723</string>
 			<key>IDESourceControlWCCName</key>
 			<string>trayrace</string>
 		</dict>
@@ -44,7 +56,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>60B1DB72-A5EE-44B1-92B1-6216313952BB</string>
+			<string>2123600CCA56472BAED125DFED422986F1D2558B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>video-mush</string>
 		</dict>

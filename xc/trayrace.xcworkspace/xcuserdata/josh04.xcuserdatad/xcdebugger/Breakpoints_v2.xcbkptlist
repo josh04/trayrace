@@ -31,8 +31,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
             endingLineNumber = "30"
-            landmarkName = "init(std::shared_ptr&lt;hdrContext&gt; context, std::vector&lt;std::shared_ptr&lt;mush::ringBuffer&gt;&gt; buffers)"
-            landmarkType = "5">
+            landmarkName = "init(std::shared_ptr&lt;mush::opencl&gt; context, std::vector&lt;std::shared_ptr&lt;mush::ringBuffer&gt;&gt; buffers)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/scene.hpp"
-            timestampString = "429731806.282444"
+            timestampString = "434762424.356225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "class Scene"
             landmarkType = "3">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/scene.hpp"
-            timestampString = "429731806.282444"
+            timestampString = "434762424.356225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "moveObject()"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/hdrControl.cpp"
-            timestampString = "430789046.573725"
+            timestampString = "435614228.749818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
             landmarkName = "hdrControl::flareEvents(int i)"
             landmarkType = "5">
          </BreakpointContent>
@@ -192,7 +192,7 @@
             startingLineNumber = "105"
             endingLineNumber = "105"
             landmarkName = "process()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -208,7 +208,7 @@
             startingLineNumber = "103"
             endingLineNumber = "103"
             landmarkName = "process()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -224,7 +224,7 @@
             startingLineNumber = "110"
             endingLineNumber = "110"
             landmarkName = "process()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -240,7 +240,7 @@
             startingLineNumber = "106"
             endingLineNumber = "106"
             landmarkName = "process()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -256,7 +256,7 @@
             startingLineNumber = "118"
             endingLineNumber = "118"
             landmarkName = "process()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -282,11 +282,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/kernels/merge.cl"
-            timestampString = "427195524.785897"
+            timestampString = "434986734.116657"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199">
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "copyImage()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -296,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/nullOutput.hpp"
-            timestampString = "427587193.066024"
+            timestampString = "435162616.828715"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "gather()"
             landmarkType = "5">
          </BreakpointContent>
@@ -328,11 +330,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/xc/gohdr-media-encoder-gui-mac/gohdr-media-encoder-gui-mac/AppDelegate.mm"
-            timestampString = "427759311.701608"
+            timestampString = "435167334.533884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "-logStack"
             landmarkType = "5">
          </BreakpointContent>
@@ -344,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/hdrControl.cpp"
-            timestampString = "430789046.573725"
+            timestampString = "435614228.749818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
+            startingLineNumber = "375"
+            endingLineNumber = "375"
             landmarkName = "hdrControl::gui()"
             landmarkType = "5">
          </BreakpointContent>
@@ -520,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/hdrControl.cpp"
-            timestampString = "430789046.573725"
+            timestampString = "435614228.749818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
+            startingLineNumber = "447"
+            endingLineNumber = "447"
             landmarkName = "hdrControl::makeContext()"
             landmarkType = "5">
          </BreakpointContent>
@@ -646,11 +648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/hdrControl.cpp"
-            timestampString = "430789046.573725"
+            timestampString = "435614228.749818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "365"
-            endingLineNumber = "365"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
             landmarkName = "hdrControl::gui()"
             landmarkType = "5">
          </BreakpointContent>
@@ -710,11 +712,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/waveformProcess.hpp"
-            timestampString = "428939110.913888"
+            timestampString = "434998925.439588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "init(std::shared_ptr&lt;mush::opencl&gt; context, std::vector&lt;std::shared_ptr&lt;mush::ringBuffer&gt;&gt; buffers)"
             landmarkType = "7">
          </BreakpointContent>
@@ -726,27 +728,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/waveformProcess.hpp"
-            timestampString = "428939113.237147"
+            timestampString = "434998925.439588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "init(std::shared_ptr&lt;mush::opencl&gt; context, std::vector&lt;std::shared_ptr&lt;mush::ringBuffer&gt;&gt; buffers)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../../video-mush/src/waveformProcessor.hpp"
-            timestampString = "430843224.672028"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "init(std::shared_ptr&lt;mush::opencl&gt; context, std::vector&lt;std::shared_ptr&lt;mush::ringBuffer&gt;&gt; buffers)"
             landmarkType = "7">
          </BreakpointContent>
@@ -758,11 +744,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/waveformProcess.hpp"
-            timestampString = "428939474.255411"
+            timestampString = "434998925.439588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "setExposure(const float e)"
             landmarkType = "7">
          </BreakpointContent>
@@ -774,11 +760,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/waveformProcess.hpp"
-            timestampString = "428939481.657628"
+            timestampString = "434998925.439588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "process()"
             landmarkType = "7">
          </BreakpointContent>
@@ -811,8 +797,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
             endingLineNumber = "81"
-            landmarkName = "init(shared_ptr&lt;mush::opencl&gt; context, hdr::config::inputConfigStruct config)"
-            landmarkType = "5">
+            landmarkName = "init(shared_ptr&lt;mush::opencl&gt; context, mush::config::inputConfigStruct config)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -828,7 +814,7 @@
             startingLineNumber = "237"
             endingLineNumber = "237"
             landmarkName = "gather()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -844,7 +830,7 @@
             startingLineNumber = "234"
             endingLineNumber = "234"
             landmarkName = "gather()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -860,7 +846,7 @@
             startingLineNumber = "206"
             endingLineNumber = "206"
             landmarkName = "gather()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -876,7 +862,7 @@
             startingLineNumber = "193"
             endingLineNumber = "193"
             landmarkName = "gather()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -892,7 +878,7 @@
             startingLineNumber = "195"
             endingLineNumber = "195"
             landmarkName = "gather()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -908,7 +894,7 @@
             startingLineNumber = "221"
             endingLineNumber = "221"
             landmarkName = "gather()"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -950,11 +936,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/hdrControl.cpp"
-            timestampString = "430789046.573725"
+            timestampString = "435614228.749818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "hdrControl::encode(std::vector&lt;std::shared_ptr&lt;mush::ringBuffer&gt;&gt; outBuffers)"
             landmarkType = "5">
          </BreakpointContent>
@@ -998,7 +984,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "264"
@@ -1014,7 +1000,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "301"
@@ -1046,7 +1032,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "273"
@@ -1062,7 +1048,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "233"
@@ -1078,7 +1064,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "232"
@@ -1094,7 +1080,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "229"
@@ -1110,7 +1096,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "234"
@@ -1126,7 +1112,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "226"
@@ -1142,7 +1128,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "224"
@@ -1158,7 +1144,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "212"
@@ -1334,7 +1320,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "218"
@@ -1350,7 +1336,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "228"
@@ -1366,7 +1352,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "235"
@@ -1382,7 +1368,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "220"
@@ -1494,7 +1480,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "221"
@@ -1510,7 +1496,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "219"
@@ -1526,7 +1512,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "217"
@@ -1542,7 +1528,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/cell.hpp"
-            timestampString = "430511565.625852"
+            timestampString = "432070968.120963"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "236"
@@ -1574,11 +1560,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/opencl.cpp"
-            timestampString = "430149480.222456"
+            timestampString = "435628567.969183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "opencl::glImage(GLuint &amp;textureID, cl_mem_flags mem)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1590,11 +1576,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/opencl.cpp"
-            timestampString = "430149537.642729"
+            timestampString = "435628567.969183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
             landmarkName = "opencl::floatImage(unsigned int width, unsigned int height, cl_mem_flags mem)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1606,11 +1592,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/opencl.cpp"
-            timestampString = "430149748.379694"
+            timestampString = "435628567.969183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "opencl::glImage(GLuint &amp;textureID, cl_mem_flags mem)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1670,11 +1656,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/video-mush/getDiscontinuities.hpp"
-            timestampString = "430761062.860382"
+            timestampString = "435628567.969183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
             landmarkName = "process()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1766,11 +1752,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/video-mush/trayraceCompose.hpp"
-            timestampString = "431802908.534162"
+            timestampString = "432066962.062045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "process()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1782,11 +1768,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/video-mush/trayraceCompose.hpp"
-            timestampString = "431802908.534162"
+            timestampString = "432066962.062045"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "process()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1798,13 +1784,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/scene.hpp"
-            timestampString = "430358688.215695"
+            timestampString = "434762424.356225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "class Scene"
-            landmarkType = "3">
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "snap(uint8_t const * redraw, shared_ptr&lt;Viewport&gt; viewport)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1814,11 +1800,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/scene.hpp"
-            timestampString = "430358688.215695"
+            timestampString = "434762424.356225"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "snap(uint8_t const * redraw, shared_ptr&lt;Viewport&gt; viewport)"
             landmarkType = "5">
          </BreakpointContent>
@@ -1878,11 +1864,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/video-mush/getDiscontinuities.hpp"
-            timestampString = "430761307.78013"
+            timestampString = "435628567.969183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97">
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "inUnlock(cl::Image2D const * mot, cl::Image2D const * depth)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1892,11 +1880,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../src/video-mush/getDiscontinuities.hpp"
-            timestampString = "430761062.860382"
+            timestampString = "435628567.969183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "process()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1929,7 +1917,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
             endingLineNumber = "137"
-            landmarkName = "final_fire(Shapes shapes, Lights lights, const motion3d&amp; cameraMotion, returnProps &amp;reProps)"
+            landmarkName = "final_fire(Shapes&amp; shapes, Lights&amp; lights, const motion3d&amp; cameraMotion, returnProps &amp;reProps)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1945,7 +1933,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "142"
             endingLineNumber = "142"
-            landmarkName = "final_fire(Shapes shapes, Lights lights, const motion3d&amp; cameraMotion, returnProps &amp;reProps)"
+            landmarkName = "final_fire(Shapes&amp; shapes, Lights&amp; lights, const motion3d&amp; cameraMotion, returnProps &amp;reProps)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1961,7 +1949,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "141"
             endingLineNumber = "141"
-            landmarkName = "final_fire(Shapes shapes, Lights lights, const motion3d&amp; cameraMotion, returnProps &amp;reProps)"
+            landmarkName = "final_fire(Shapes&amp; shapes, Lights&amp; lights, const motion3d&amp; cameraMotion, returnProps &amp;reProps)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1988,11 +1976,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/hdrControl.cpp"
-            timestampString = "430789046.573725"
+            timestampString = "435614228.749818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "330"
-            endingLineNumber = "330"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
             landmarkName = "hdrControl::gui()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2004,11 +1992,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/hdrControl.cpp"
-            timestampString = "430789046.573725"
+            timestampString = "435614228.749818"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
+            startingLineNumber = "333"
+            endingLineNumber = "333"
             landmarkName = "hdrControl::gui()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2178,11 +2166,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/capture/gui.cpp"
-            timestampString = "431864034.471314"
+            timestampString = "435094897.022281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "384"
-            endingLineNumber = "384"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
             landmarkName = "hdrGui::glInit(int count)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2242,11 +2230,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/capture/gui.cpp"
-            timestampString = "431864034.471314"
+            timestampString = "435094897.022281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "410"
-            endingLineNumber = "410"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "hdrGui::glInit(int count)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2258,11 +2246,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/capture/gui.cpp"
-            timestampString = "431864034.471314"
+            timestampString = "435094897.022281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "hdrGui::glInit(int count)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2608,11 +2596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/ringBuffer.cpp"
-            timestampString = "431897687.776151"
+            timestampString = "434800940.067967"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "ringBuffer::outUnlock()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2661,8 +2649,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
             endingLineNumber = "246"
-            landmarkName = "class Camera"
-            landmarkType = "3">
+            landmarkName = "profileStop(std::atomic_long &amp;count, int64_t &amp;oldPercentile, uint32_t &amp;percent)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2679,6 +2667,436 @@
             endingLineNumber = "247"
             landmarkName = "profileStop(std::atomic_long &amp;count, int64_t &amp;oldPercentile, uint32_t &amp;percent)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/cell.hpp"
+            timestampString = "432069648.040349"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "fire_primary(const Shapes&amp; shapes, const line3d&amp; ray, rayProps&amp; props)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/hdrControl.cpp"
+            timestampString = "433724619.805029"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "hdrControl::addInput()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/plane3d.hpp"
+            timestampString = "434641601.800858"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "plane3d(const point3d&amp; a, const point3d&amp; b, const point3d&amp; c, Texture texture)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/triangle3d.hpp"
+            timestampString = "434663348.32674"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "class Triangle3d"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/triangle3d.hpp"
+            timestampString = "434663348.32674"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "class Triangle3d"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/triangle3d.hpp"
+            timestampString = "434663348.32674"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "class Triangle3d"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/triangle3d.hpp"
+            timestampString = "434663348.32674"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "class Triangle3d"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/plane3d.hpp"
+            timestampString = "434740620.755278"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "plane3d(const point3d&amp; a, const point3d&amp; b, const point3d&amp; c, Texture texture)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/scene.hpp"
+            timestampString = "434761577.34295"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "init(SceneStruct * config)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/scene.hpp"
+            timestampString = "434761592.014415"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "init(SceneStruct * config)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/hdrProcessor.cpp"
+            timestampString = "435006871.840431"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/gohdrDecodeProcess.hpp"
+            timestampString = "434986796.467284"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "init(std::shared_ptr&lt;mush::opencl&gt; context, std::vector&lt;std::shared_ptr&lt;mush::ringBuffer&gt;&gt; buffers)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/nullProcess.hpp"
+            timestampString = "435001908.382599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "init(std::shared_ptr&lt;mush::opencl&gt; context, std::shared_ptr&lt;mush::ringBuffer&gt; buffer)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/nullProcess.hpp"
+            timestampString = "435001909.710646"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "init(std::shared_ptr&lt;mush::opencl&gt; context, std::vector&lt;std::shared_ptr&lt;mush::ringBuffer&gt;&gt; buffers)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/profile.hpp"
+            timestampString = "435002550.458969"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "frameReport()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/lateralTonemapProcess.hpp"
+            timestampString = "435009811.606084"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "process()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/lateralTonemapProcess.hpp"
+            timestampString = "435011207.418925"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "process()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/lateralTonemapProcess.hpp"
+            timestampString = "435012159.65109"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "process()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/nullOutput.hpp"
+            timestampString = "435162616.828715"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "gather()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/capture/flare2k.cpp"
+            timestampString = "435162721.300704"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "Flare2KCaptureDelegate::VideoInputFrameArrived(IDeckLinkVideoInputFrame * videoInputFrame, IDeckLinkAudioInputPacket * audioFrame)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/colourBilateralProcess.hpp"
+            timestampString = "435612865.101992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "process()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../video-mush/src/mergeThreeProcess.hpp"
+            timestampString = "435627064.627573"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "process()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435630048.273909"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
+            landmarkName = "main(int argc, char** argv)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435630161.143852"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "doTrayRaceThread(SceneStruct sconfig, std::atomic&lt;bool&gt; * stop, std::vector&lt;std::shared_ptr&lt;inputMethods&gt;&gt; inputPtrs, std::shared_ptr&lt;trayraceProcessor&gt; vmp)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435630272.705321"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "doTrayRaceThread(SceneStruct sconfig, std::atomic&lt;bool&gt; * stop, std::vector&lt;std::shared_ptr&lt;inputMethods&gt;&gt; inputPtrs, std::shared_ptr&lt;trayraceProcessor&gt; vmp)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435630300.947635"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "main(int argc, char** argv)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435630330.068423"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "main(int argc, char** argv)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -10,29 +10,29 @@
 	<string>trayrace</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7A0E2DC3-F548-457C-97F5-D43050EBF108</key>
-		<string>ssh://github.com/josh04/trayrace.git</string>
+		<key>A84A7C8A29ED0A2CD14464A239CBC84F83DE7723</key>
+		<string>github.com:josh04/trayrace.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>xc/trayrace/trayrace.xcodeproj/project.xcworkspace</string>
+	<string>xc/trayrace.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7A0E2DC3-F548-457C-97F5-D43050EBF108</key>
-		<string>../../../..</string>
+		<key>A84A7C8A29ED0A2CD14464A239CBC84F83DE7723</key>
+		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/josh04/trayrace.git</string>
+	<string>github.com:josh04/trayrace.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7A0E2DC3-F548-457C-97F5-D43050EBF108</string>
+	<string>A84A7C8A29ED0A2CD14464A239CBC84F83DE7723</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7A0E2DC3-F548-457C-97F5-D43050EBF108</string>
+			<string>A84A7C8A29ED0A2CD14464A239CBC84F83DE7723</string>
 			<key>IDESourceControlWCCName</key>
 			<string>trayrace</string>
 		</dict>

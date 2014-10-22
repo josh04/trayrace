@@ -26,6 +26,22 @@ namespace tr {
 
 		plane3d(double distance, double theta, double phi, Light::rgb colour)
 			: plane3d(distance, theta, phi, std::make_unique<Paint>(colour)) {}
+        
+        plane3d(const point3d& a, const point3d& b, const point3d& c, Texture texture) : Shape(0.0, std::move(texture)) {
+            const point3d tmp(b-a);
+            const point3d tmp2(c-a);
+            norm = tmp.cross(tmp2);
+            
+            theta = (180.0 / M_PI) * atan2(norm.z, norm.x);
+            phi = (180.0 / M_PI) * atan2(-norm.y, sqrt(pow(norm.x, 2.0) + pow(norm.z, 2.0)));
+            
+            point3d norm2 = (point3d(1, 0, 0)*zRotation(phi*(M_PI / 180.0))*yRotation(theta*(M_PI / 180.0)));
+            
+            distance = ((a).dot(norm));
+            location = distance * norm;
+            
+            move();
+        }
 
 		~plane3d() {
 

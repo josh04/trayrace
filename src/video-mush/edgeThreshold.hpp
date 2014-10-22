@@ -48,9 +48,9 @@ public:
         addItem((unsigned char *)context->floatImage(_width, _height));
         
         
-        clear->setArg(0, *((cl::Image2D *)_getMem(0)));
-        threshold->setArg(2, *((cl::Image2D *)_getMem(0)));
-        samples->setArg(1, *((cl::Image2D *)_getMem(0)));
+        clear->setArg(0, *_getImageMem(0));
+        threshold->setArg(2, *_getImageMem(0));
+        samples->setArg(1, *_getImageMem(0));
         queue = context->getQueue();
     }
     
@@ -61,13 +61,13 @@ public:
         queue->enqueueNDRangeKernel(*clear, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
-        cl::Image2D * image = (cl::Image2D *)imageBuffe->outLock();
+        cl::Image2D const * image = imageBuffe->imageOutLock();
         if (image == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D * laplace = (cl::Image2D *)laplaceBuffer->outLock();
+        cl::Image2D const * laplace = laplaceBuffer->imageOutLock();
         if (laplace == nullptr) {
             release();
             return;

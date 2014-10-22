@@ -59,19 +59,13 @@ public:
         inLock();
         cl::Event event;
         
-        cl::Image2D * mot = (cl::Image2D *)motionVectors->outLock();
+        cl::Image2D const * mot = motionVectors->imageOutLock();
         if (mot == nullptr) {
             release();
             return;
         }
-        /*
-        cl::Image2D * in = (cl::Image2D *)input->outLock();
-        if (in == nullptr) {
-            release();
-            return;
-        }*/
         
-        cl::Image2D * inDepth = (cl::Image2D *)depth->outLock();
+        cl::Image2D const * inDepth = depth->imageOutLock();
         if (inDepth == nullptr) {
             release();
             return;
@@ -91,7 +85,7 @@ public:
         
     }
     
-    virtual void inUnlock(cl::Image2D * mot, cl::Image2D * depth) {
+    virtual void inUnlock(cl::Image2D const * mot, cl::Image2D const * depth) {
         if (getTagInGuiMember() && tagGui != nullptr) {
             
             depthDiff->setArg(0, *temp_image);

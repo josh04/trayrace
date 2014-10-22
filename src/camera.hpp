@@ -54,7 +54,7 @@ namespace tr {
             //motion = motion3d(move, (zRotation(addPhi*(M_PI/180.0))*yRotation(addTheta*(M_PI/180.0))).inverse());
             
 			point3d gaze(1, 0, 0);
-            point3d up(0, 1, 0);
+            point3d up(0, -1, 0);
             
 			gaze = (gaze*zRotate)*yRotate;
 			up = (up*zRotate)*yRotate;

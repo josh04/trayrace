@@ -64,8 +64,8 @@ void trayraceProcessor::init(std::shared_ptr<mush::opencl> context, std::vector<
     std::vector<std::shared_ptr<mush::ringBuffer>> composeBuff;
     inputBuffer->addRepeat();
     composeBuff.push_back(inputBuffer);
-    redraw->addRepeat();
-    composeBuff.push_back(redraw);
+    discontinuities->addRepeat();
+    composeBuff.push_back(discontinuities);
     buffers[3]->addRepeat();
     composeBuff.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
     composeBuff.push_back(upsample);

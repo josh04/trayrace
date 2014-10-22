@@ -61,12 +61,12 @@ public:
         lowRes = context->floatImage(_width/4, _height/4);
         addItem(context->floatImage(_width, _height));
         
-        spatialClear->setArg(0, *(cl::Image2D *)_getMem(0));
+        spatialClear->setArg(0, *_getImageMem(0));
         
         scaleImage->setArg(0, *lowRes);
         
-        spatialUpsample->setArg(0, *(cl::Image2D *)_getMem(0));
-        spatialUpsample->setArg(1, *(cl::Image2D *)_getMem(0));
+        spatialUpsample->setArg(0, *_getImageMem(0));
+        spatialUpsample->setArg(1, *_getImageMem(0));
         spatialUpsample->setArg(2, *lowRes);
         
         queue = context->getQueue();
@@ -86,23 +86,26 @@ public:
             return;
         }
         
-        cl::Image2D * geom = (cl::Image2D *)geometry->outLock();
+        cl::Image2D const * geom = geometry->imageOutLock();
         if (geom == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D * d = (cl::Image2D *)depth->outLock();
+        cl::Image2D const * d = depth->imageOutLock();
         if (d == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D * re = (cl::Image2D *)redraw->outLock();
+        cl::Image2D const * re = redraw->imageOutLock();
         if (re == nullptr) {
             release();
             return;
         }
+        
+        count = (count+1) % 16;
+        spatialUpsample->setArg(8, count);
         
         scaleImage->setArg(1, *re);
         scaleImage->setArg(2, *map);
@@ -112,13 +115,9 @@ public:
         spatialUpsample->setArg(3, *geom);
         spatialUpsample->setArg(4, *d);
         spatialUpsample->setArg(5, *map);
+        spatialUpsample->setArg(9, *re);
         
         // BLOCK 'O' FIVE /*FOUR*/
-
-        spatialUpsample->setArg(6, (char)0);
-        spatialUpsample->setArg(7, (char)0);
-        queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
-        event.wait();
 		
 		spatialUpsample->setArg(6, (char)-1);
 		spatialUpsample->setArg(7, (char)0);
@@ -137,6 +136,12 @@ public:
         
 		spatialUpsample->setArg(6, (char)0);
 		spatialUpsample->setArg(7, (char)1);
+        queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
+        event.wait();
+        
+        
+        spatialUpsample->setArg(6, (char)0);
+        spatialUpsample->setArg(7, (char)0);
         queue->enqueueNDRangeKernel(*spatialUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         

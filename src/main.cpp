@@ -62,24 +62,24 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
 	while (counter < 359 && !(*stop)) {
 		++counter;
 		scene.preSnap(depthMap, normalMap, colourMap);
-        unsigned char * in = nullptr;
+        unsigned char * inptr = nullptr;
         
 		// depth
-        in = (unsigned char *) inputPtrs[1]->lockInput();
-		if (in == nullptr) {break;}
-		memcpy(in, depthMap->ptr(), size * 4 * sconfig.width * sconfig.height);
+        inptr = (unsigned char *) inputPtrs[1]->lockInput();
+		if (inptr == nullptr) {break;}
+		memcpy(inptr, depthMap->ptr(), size * 4 * sconfig.width * sconfig.height);
 		inputPtrs[1]->unlockInput();
         
 		// normals
-        in = (unsigned char *) inputPtrs[2]->lockInput();
-		if (in == nullptr) {break;}
-		memcpy(in, normalMap->ptr(), size * 4 * sconfig.width * sconfig.height);
+        inptr = (unsigned char *) inputPtrs[2]->lockInput();
+		if (inptr == nullptr) {break;}
+		memcpy(inptr, normalMap->ptr(), size * 4 * sconfig.width * sconfig.height);
 		inputPtrs[2]->unlockInput();
         
 		// colour
-        in = (unsigned char *) inputPtrs[3]->lockInput();
-		if (in == nullptr) {break;}
-		memcpy(in, colourMap->ptr(), size * 4 * sconfig.width * sconfig.height);
+        inptr = (unsigned char *) inputPtrs[3]->lockInput();
+		if (inptr == nullptr) {break;}
+		memcpy(inptr, colourMap->ptr(), size * 4 * sconfig.width * sconfig.height);
 		inputPtrs[3]->unlockInput();
         
         auto redraw = vmp->getRedraw();
@@ -96,9 +96,9 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
         }
         
 		// view
-		in = (unsigned char *) inputPtrs[0]->lockInput();
-		if (in == nullptr) {break;}
-		memcpy(in, viewport->ptr(), size * 4 * sconfig.width * sconfig.height);
+		inptr = (unsigned char *) inputPtrs[0]->lockInput();
+		if (inptr == nullptr) {break;}
+		memcpy(inptr, viewport->ptr(), size * 4 * sconfig.width * sconfig.height);
 		inputPtrs[0]->unlockInput();
         
 		sconfig.waistRotation -= 1;
