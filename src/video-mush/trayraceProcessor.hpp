@@ -45,14 +45,6 @@ public:
     
 	void doFrame();
     
-	void profileInit() {
-		profile.init();
-	}
-    
-	void profileReport() {
-		profile.totalReport();
-	}
-    
 	static const std::vector<std::string> listKernels();
     
     std::vector<std::shared_ptr<mush::ringBuffer>> getBuffers();
@@ -94,7 +86,6 @@ private:
 	cl::Event event;
 	cl::CommandQueue * queue;
     
-	Profile profile;
 };
 
 #endif

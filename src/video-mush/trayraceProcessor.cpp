@@ -25,7 +25,6 @@
 #include "trayraceProcessor.hpp"
 
 void trayraceProcessor::init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers) {
-    profileInit();
     
     if (buffers.size() < 1) {
         putLog("No buffers at encoder");
@@ -134,15 +133,6 @@ void trayraceProcessor::init(std::shared_ptr<mush::opencl> context, std::vector<
 }
 
 void trayraceProcessor::doFrame() {
-    profile.start();
-    
-    profile.inReadStart();
-    profile.inReadStop();
-    
-    profile.writeToGPUStart();
-    profile.writeToGPUStop();
-    
-    profile.executionStart();
     
     depthDelay->process();
     //        steppers[1]->process();
@@ -159,22 +149,10 @@ void trayraceProcessor::doFrame() {
     motionEdgeSamples->process();
     motionReconstruction->process();
     
-    profile.executionStop();
-    
-    profile.writeStart();
     for (auto img : _nulls) {
         img->outUnlock(); // removes the need for nullers; hacky hacky hack hack
     }
-    profile.writeStop();
-    
-    profile.readFromGPUStart();
-    profile.readFromGPUStop();
-    
-    profile.waitStart();
-    profile.waitStop();
-    
-    profile.stop();
-    profile.frameReport();
+
 }
 
 const std::vector<std::string> trayraceProcessor::listKernels() {
@@ -199,11 +177,9 @@ std::vector<std::shared_ptr<mush::frameStepper>> trayraceProcessor::getFrameStep
 }
 
 void trayraceProcessor::go() {
-    profileInit();
     while (inputBuffer->good()) {
         doFrame();
     }
-    profileReport();
     
     
     if (depthEdgeSamples != nullptr) {

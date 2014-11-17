@@ -220,7 +220,7 @@ namespace tr {
         
         shared_ptr<Cube> cube = nullptr;
         
-        Assimp::Importer importer;
+        std::shared_ptr<Assimp::Importer> importer;
 	};
 
 }

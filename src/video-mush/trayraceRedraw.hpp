@@ -13,7 +13,7 @@
 
 class trayraceRedraw : public mush::integerMapProcess {
 public:
-    trayraceRedraw() : mush::integerMapProcess() {
+    trayraceRedraw() : mush::integerMapProcess(), mapBuffer() {
         
     }
     
