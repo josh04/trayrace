@@ -54,7 +54,7 @@ namespace tr {
             //motion = motion3d(move, (zRotation(addPhi*(M_PI/180.0))*yRotation(addTheta*(M_PI/180.0))).inverse());
             
 			point3d gaze(1, 0, 0);
-            point3d up(0, -1, 0);
+            point3d up(0, 1, 0);
             
 			gaze = (gaze*zRotate)*yRotate;
 			up = (up*zRotate)*yRotate;
@@ -62,10 +62,8 @@ namespace tr {
 			up = up.unit();
             
 			n = tan(horizontalFOV / 2.0*(M_PI / 180.0));
-			up = up.unit();
-			gaze = gaze.unit();
             
-			unit3d w = -gaze / gaze.magnitude();
+			unit3d w = -gaze;
 			unit3d u = up.cross(w);
 			unit3d v = w.cross(u);
             
@@ -95,13 +93,12 @@ namespace tr {
 			int64_t viewportCellCount = cells.size() / (_hSubsample * _vSubsample);
 			int64_t overflow = viewportCellCount % _numThreads;
 			int64_t cells_per_thread = (viewportCellCount - overflow) / _numThreads;
-            std::atomic_long count4;
-            count4 = 0;
+			int64_t count4 = 0;
             
             std::vector<std::thread> threads;
             
             for (uint32_t i = 0; i < _numThreads-1; ++i) {
-                threads.push_back(std::thread(&Camera::preliminary_subSnap, this, cells_per_thread*i, cells_per_thread, depthMap, normalMap, colourMap, std::ref(cells), shapes, lights, std::ref(count4), false));
+				threads.push_back(std::thread(&Camera::preliminary_subSnap, this, cells_per_thread*i, cells_per_thread, depthMap, normalMap, colourMap, std::ref(cells), shapes, lights, std::ref(count4), false));
             }
 			
 			profile.init();
@@ -118,8 +115,7 @@ namespace tr {
 			int64_t viewportCellCount = cells.size() / (_hSubsample * _vSubsample);
 			int64_t overflow = viewportCellCount % _numThreads;
 			int64_t cells_per_thread = (viewportCellCount - overflow) / _numThreads;
-            std::atomic_long count4;
-            count4 = 0;
+            int64_t count4 = 0;
             
             std::vector<std::thread> threads;
             
@@ -166,7 +162,7 @@ namespace tr {
                             shared_ptr<Viewport> depthMap,
                             shared_ptr<Viewport> normalMap,
                             shared_ptr<Viewport> colourMap,
-                            vector<Cell> &cells, Shapes shapes, Lights lights, std::atomic_long &count, bool useProfile) {
+                            vector<Cell> &cells, Shapes shapes, Lights lights, int64_t &count, bool useProfile) {
             
 			int64_t oldPercentile = 0;
 			uint32_t percent = 0;
@@ -198,9 +194,9 @@ namespace tr {
                 normalMap->put(Light::rgb(props.normal.x, props.normal.y, props.normal.z), start+i);
                 colourMap->put(Light::rgb(props.movement.x, props.movement.y, props.movement.z), start+i);
                 
-				++count;
                 
                 if (useProfile) {
+					++count;
                     profileStop(count, oldPercentile, percent);
                 }
 			}
@@ -211,7 +207,7 @@ namespace tr {
 		}
         
 		void final_subSnap(int64_t start, int64_t num, shared_ptr<Viewport> viewport,
-                     vector<Cell> &cells, Shapes shapes, Lights lights, std::atomic_long &count, bool useProfile) {
+			vector<Cell> &cells, Shapes shapes, Lights lights, int64_t &count, bool useProfile) {
             
 			int64_t oldPercentile = 0;
 			uint32_t percent = 0;
@@ -231,9 +227,9 @@ namespace tr {
                 
 				viewport->put(colour, start+i);
                 
-				++count;
                 
                 if (useProfile) {
+					++count;
                     profileStop(count, oldPercentile, percent);
                 }
 			}
@@ -243,10 +239,10 @@ namespace tr {
             }
 		}
         
-        void profileStop(std::atomic_long &count, int64_t &oldPercentile, uint32_t &percent) {
+		void profileStop(int64_t &count, int64_t &oldPercentile, uint32_t &percent) {
             if ((count - oldPercentile) > percentBoundary) {
                 profile.stop();
-                std::cout << "Processing pixel " << (count) << " of " << width*height << " " << ++percent << "% (" << profile.total / 1e9 << "s elapsed) \r";
+				std::cout << "Processing pixel " << (count * _numThreads) << " of " << width*height << " " << ++percent * _numThreads << "% (" << profile.total / 1e9 << "s elapsed) \r";
                 oldPercentile = count;
                 profile.start();
             }
