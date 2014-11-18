@@ -24,11 +24,11 @@ namespace tr {
 
 		ViewportFloat(unsigned int width, unsigned int height)
 			: width(width), height(height) {
-			screen = std::make_shared<vector<rgb>>();
 
+			screen.reserve(width*height);
 			for (unsigned int w = 0; w < width; ++w) {
 				for (unsigned int h = 0; h < height; ++h) {
-					screen->push_back(rgb());
+					screen.push_back(rgb());
 				}
 			}
 
@@ -47,11 +47,11 @@ namespace tr {
 		}
 
 		unsigned char * ptr() {
-			return (unsigned char *)&(*screen)[0];
+			return (unsigned char *)&screen[0];
 		}
 
 		void put(rgb colour, unsigned int index) {
-			(*screen.get())[index] = colour;
+			screen[index] = colour;
 		}
 
 		void put(Light::rgb colour, unsigned int index) {
@@ -64,10 +64,10 @@ namespace tr {
 	private:
 		unsigned int width, height;
 		rgb get(unsigned int index) {
-			return (*screen.get())[index];
+			return screen[index];
 		}
 
-		shared_ptr<vector<rgb>> screen;
+		vector<rgb> screen;
 	};
 }
 
