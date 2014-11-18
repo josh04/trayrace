@@ -37,9 +37,14 @@ void runLog(std::atomic_int * over) {
 	}
 };
 
-void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector<std::shared_ptr<inputMethods>> inputPtrs, std::shared_ptr<trayraceProcessor> vmp) {
+void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector<std::shared_ptr<inputMethods>> inputPtrs, std::shared_ptr<trayraceProcessor> trayraceVideoMush) {
 	Scene scene{};
 	scene.init(&sconfig);
+
+	std::shared_ptr<inputMethods> mainImage = inputPtrs[0];
+	std::shared_ptr<inputMethods> depthImage = inputPtrs[1];
+	std::shared_ptr<inputMethods> geomImage = inputPtrs[2];
+	std::shared_ptr<inputMethods> motionImage = inputPtrs[3];
     
 	// load viewport
 	std::shared_ptr<ViewportFloat> viewport = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
@@ -65,24 +70,24 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
         unsigned char * inptr = nullptr;
         
 		// depth
-        inptr = (unsigned char *) inputPtrs[1]->lockInput();
+		inptr = (unsigned char *)depthImage->lockInput();
 		if (inptr == nullptr) {break;}
 		memcpy(inptr, depthMap->ptr(), size * 4 * sconfig.width * sconfig.height);
-		inputPtrs[1]->unlockInput();
+		depthImage->unlockInput();
         
 		// normals
-        inptr = (unsigned char *) inputPtrs[2]->lockInput();
+		inptr = (unsigned char *)geomImage->lockInput();
 		if (inptr == nullptr) {break;}
 		memcpy(inptr, normalMap->ptr(), size * 4 * sconfig.width * sconfig.height);
-		inputPtrs[2]->unlockInput();
+		geomImage->unlockInput();
         
 		// colour
-        inptr = (unsigned char *) inputPtrs[3]->lockInput();
+		inptr = (unsigned char *)motionImage->lockInput();
 		if (inptr == nullptr) {break;}
 		memcpy(inptr, colourMap->ptr(), size * 4 * sconfig.width * sconfig.height);
-		inputPtrs[3]->unlockInput();
+		motionImage->unlockInput();
         
-        auto redraw = vmp->getRedraw();
+		auto redraw = trayraceVideoMush->getRedraw();
         uint8_t * redrawMap = nullptr;
         {
             redrawMap = (uint8_t *)redraw->getRedrawMap().outLock();
@@ -96,10 +101,10 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
         }
         
 		// view
-		inptr = (unsigned char *) inputPtrs[0]->lockInput();
+		inptr = (unsigned char *)mainImage->lockInput();
 		if (inptr == nullptr) {break;}
 		memcpy(inptr, viewport->ptr(), size * 4 * sconfig.width * sconfig.height);
-		inputPtrs[0]->unlockInput();
+		mainImage->unlockInput();
         
 		sconfig.waistRotation -= 1;
 		sconfig.CameraLocation = sconfig.CameraLocation * yRotation(-1.0*(M_PI/180.0));//+ point3d(0.5, 0, 0.5);
@@ -108,10 +113,10 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
 	}
 
     
-    std::shared_ptr<mush::imageBuffer> redraw = vmp->getRedraw();
+    std::shared_ptr<mush::imageBuffer> redraw = trayraceVideoMush->getRedraw();
     redraw->kill();
     redraw = nullptr;
-    vmp = nullptr;
+    trayraceVideoMush = nullptr;
     
     for (int i = 0; i < inputPtrs.size(); ++i) {
         inputPtrs[i]->releaseInput();
@@ -125,10 +130,10 @@ int main(int argc, char** argv)
 	// load scene data
 	SceneStruct sconfig;
 	sconfig.defaults();
+
 	//	- list of objects
     std::atomic<bool> stop;
     stop = false;
-    
     
 	// initialise config struct
 	mush::config config;
@@ -184,18 +189,11 @@ int main(int argc, char** argv)
     std::shared_ptr<trayraceProcessor> vmp = make_shared<trayraceProcessor>(config.gamma, config.darken);
     
 	std::thread * thread = new std::thread(&doTrayRaceThread, sconfig, &stop, inputPtrs, vmp);
-    
-    std::atomic<int> over(0);
-	
-//	std::thread logThread(&runLog, &over);
 
     videoMushExecute(vmp);
-	over++;
     
     stop = true;
-//    if (logThread->joinable()) {
-//        logThread->join();
-//    }
+
     if (thread->joinable()) {
         thread->join();
     }

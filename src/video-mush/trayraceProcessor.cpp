@@ -128,6 +128,7 @@ void trayraceProcessor::init(std::shared_ptr<mush::opencl> context, std::vector<
     
     
     queue = context->getQueue();
+	this->context = context;
     
     //_guiBuffers.push_back(imageBuffer);
 }
