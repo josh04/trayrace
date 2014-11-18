@@ -28,8 +28,9 @@ namespace tr {
 	class Camera {
 	public:
 		Camera(point3d location, double theta, double phi, double horizontalFOV, unsigned int width, unsigned int height)
-			: location(location), width(width), height(height), horizontalFOV(horizontalFOV), yRotate(yRotation(theta*(M_PI/180.0))), zRotate(zRotation(phi*(M_PI/180.0))), percentBoundary((width*height) / 100.0) {
+			: location(location), width(width), height(height), horizontalFOV(horizontalFOV), percentBoundary((width*height) / 100.0) {
                 
+			cells.reserve(height * width * _hSubsample * _vSubsample);
             for (uint32 j = 0; j < height * _vSubsample; j = j+_vSubsample) {
                 for (uint32 i = 0; i < width * _hSubsample; ++i) {
                     for (uint32 k = 0; k < _vSubsample; ++k) {
@@ -53,31 +54,25 @@ namespace tr {
             
             //motion = motion3d(move, (zRotation(addPhi*(M_PI/180.0))*yRotation(addTheta*(M_PI/180.0))).inverse());
             
-			point3d gaze(1, 0, 0);
-            point3d up(0, 1, 0);
-            
-			gaze = (gaze*zRotate)*yRotate;
-			up = (up*zRotate)*yRotate;
-			gaze = gaze.unit();
-			up = up.unit();
+			const unit3d gaze(point3d(1, 0, 0) * zRotate * yRotate);
+			const unit3d up(point3d(0, 1, 0) * zRotate * yRotate);
             
 			n = tan(horizontalFOV / 2.0*(M_PI / 180.0));
             
-			unit3d w = -gaze;
-			unit3d u = up.cross(w);
-			unit3d v = w.cross(u);
+			const unit3d w = -gaze;
+			const unit3d u = up.cross(w);
+			const unit3d v = w.cross(u);
             
             const int64_t subHeight = height *_vSubsample;
             const int64_t subWidth = width * _hSubsample;
             const point3d gazen = gaze*n;
             
-            
             const point3d vratio = v * static_cast<double>(height) / static_cast<double>(width);
+
 			for (uint32 j = 0; j < subHeight; j = j+_vSubsample) {
 				for (uint32 i = 0; i < subWidth; ++i) {
-                    
                     for (uint32 k = 0; k < _vSubsample; ++k) {
-                        unit3d dir = gazen + vratio*(-1.0 + 2*((0.5 + j+k) / (subHeight))) + u*(-1.0 + 2*((0.5 + i) / (subWidth)));
+                        unit3d dir = gazen + vratio*(-1.0 + 2.0*((0.5 + j+k) / (subHeight))) + u*(-1.0 + 2.0*((0.5 + i) / (subWidth)));
                         cells[j*subWidth + i*_vSubsample + k].move(line3d(location, dir), u, v, horizontalFOV);
                     }
 
@@ -162,7 +157,7 @@ namespace tr {
                             shared_ptr<Viewport> depthMap,
                             shared_ptr<Viewport> normalMap,
                             shared_ptr<Viewport> colourMap,
-                            vector<Cell> &cells, Shapes shapes, Lights lights, int64_t &count, bool useProfile) {
+                            vector<Cell> &cells, Shapes &shapes, Lights &lights, int64_t &count, bool useProfile) {
             
 			int64_t oldPercentile = 0;
 			uint32_t percent = 0;
@@ -207,7 +202,7 @@ namespace tr {
 		}
         
 		void final_subSnap(int64_t start, int64_t num, shared_ptr<Viewport> viewport,
-			vector<Cell> &cells, Shapes shapes, Lights lights, int64_t &count, bool useProfile) {
+			vector<Cell> &cells, Shapes &shapes, Lights &lights, int64_t &count, bool useProfile) {
             
 			int64_t oldPercentile = 0;
 			uint32_t percent = 0;
@@ -226,7 +221,6 @@ namespace tr {
                 colour = colour / (double)(_hSubsample * _vSubsample);
                 
 				viewport->put(colour, start+i);
-                
                 
                 if (useProfile) {
 					++count;
