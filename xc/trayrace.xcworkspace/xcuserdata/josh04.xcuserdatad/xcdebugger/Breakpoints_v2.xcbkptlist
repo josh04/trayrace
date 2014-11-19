@@ -1164,9 +1164,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "199"
-            endingLineNumber = "199"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
-            landmarkType = "5">
+            endingLineNumber = "199">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1543,22 +1541,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../src/camera.hpp"
-            timestampString = "430220850.270909"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "move(const point3d newLocation, const double newTheta, const double newPhi, const double changeFOV)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/opencl.cpp"
             timestampString = "435628567.969183"
             startingColumnNumber = "9223372036854775807"
@@ -1612,9 +1594,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
-            landmarkType = "5">
+            endingLineNumber = "179">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1628,9 +1608,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
-            landmarkType = "5">
+            endingLineNumber = "190">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1820,9 +1798,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
-            landmarkType = "5">
+            endingLineNumber = "157">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1836,9 +1812,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
-            landmarkType = "5">
+            endingLineNumber = "156">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1852,9 +1826,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "class Camera"
-            landmarkType = "3">
+            endingLineNumber = "155">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1900,9 +1872,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
-            landmarkType = "5">
+            endingLineNumber = "187">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2632,9 +2602,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
-            endingLineNumber = "176"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
-            landmarkType = "5">
+            endingLineNumber = "176">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2648,9 +2616,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "class Camera"
-            landmarkType = "3">
+            endingLineNumber = "246">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2664,9 +2630,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "247"
-            endingLineNumber = "247"
-            landmarkName = "class Camera"
-            landmarkType = "3">
+            endingLineNumber = "247">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

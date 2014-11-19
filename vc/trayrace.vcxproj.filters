@@ -25,6 +25,9 @@
     <Filter Include="Source Files\Video Mush">
       <UniqueIdentifier>{5689838f-54fb-4d87-82d3-84f20d0dc145}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kernels">
+      <UniqueIdentifier>{68894e68-2e65-498a-97a9-26d54ce04e93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\scene.hpp">
@@ -122,6 +125,15 @@
     </ClInclude>
     <ClInclude Include="..\src\video-mush\trayraceUpsample.hpp">
       <Filter>Source Files\Video Mush</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\algebra.h">
+      <Filter>Source Files\Algebra</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\cpuCamera.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\gpuCamera.hpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

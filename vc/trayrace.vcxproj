@@ -161,7 +161,10 @@
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\video-mush\trayraceProcessor.cpp" />
+    <ClInclude Include="..\src\algebra.h" />
     <ClInclude Include="..\src\checkerboard.hpp" />
+    <ClInclude Include="..\src\cpuCamera.hpp" />
+    <ClInclude Include="..\src\gpuCamera.hpp" />
     <ClInclude Include="..\src\paint.hpp" />
   </ItemGroup>
   <ItemGroup>

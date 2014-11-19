@@ -187,7 +187,7 @@ int main(int argc, char** argv)
     inputPtrs.push_back(videoMushAddInput());
     
     std::shared_ptr<trayraceProcessor> vmp = make_shared<trayraceProcessor>(config.gamma, config.darken);
-    
+
 	std::thread * thread = new std::thread(&doTrayRaceThread, sconfig, &stop, inputPtrs, vmp);
 
     videoMushExecute(vmp);

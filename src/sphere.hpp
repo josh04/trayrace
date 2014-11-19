@@ -49,6 +49,10 @@ namespace tr {
             radius += newRadius;
         }
 
+		double getRadius() const {
+			return radius;
+		}
+
 	private:
 		double radius;
 	};

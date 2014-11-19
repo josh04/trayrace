@@ -11,7 +11,8 @@ using std::vector;
 
 #include "SceneStruct.hpp"
 #include "sphere.hpp"
-#include "camera.hpp"
+#include "cpuCamera.hpp"
+#include "gpuCamera.hpp"
 #include "viewport8bit.hpp"
 #include "boundBox.hpp"
 #include "boundOblong.hpp"
@@ -41,7 +42,10 @@ namespace tr {
 
 		void init(SceneStruct * config) {
 			shapes = std::make_shared<vector<shared_ptr<Shape>>>();
-			camera = std::make_shared<Camera>(config->CameraLocation, config->waistRotation, config->headTilt, config->horizontalFov, config->width, config->height);
+
+			auto context = videoMushGetContext();
+			camera = std::make_shared<gpuCamera>(context, config->CameraLocation, config->waistRotation, config->headTilt, config->horizontalFov, config->width, config->height);
+			//camera = std::make_shared<cpuCamera>(config->CameraLocation, config->waistRotation, config->headTilt, config->horizontalFov, config->width, config->height);
 			lights = std::make_shared<vector<shared_ptr<Light>>>();
 
 			shared_ptr<Shape> redBall = std::static_pointer_cast<Shape>(make_shared<Sphere>(point3d(1, -3.5, 1), 2, std::make_unique<Paint>(Light::rgb(0.5, 0.0, 0.0))));
