@@ -81,6 +81,7 @@ namespace tr {
 
 			for (uint32_t i = 0; i < _numThreads - 1; ++i) {
 				threads.push_back(std::thread(&cpuCamera::preliminary_subSnap, this, cells_per_thread*i, cells_per_thread, depthMap, normalMap, colourMap, std::ref(cells), std::ref(shapes), std::ref(lights), std::ref(count4), false));
+
 			}
 
 			profile.init();
@@ -102,6 +103,7 @@ namespace tr {
 			std::vector<std::thread> threads;
 
 			for (uint32_t i = 0; i < _numThreads - 1; ++i) {
+                
 				threads.push_back(std::thread(&cpuCamera::final_subSnap, this, cells_per_thread*i, cells_per_thread, viewport, std::ref(cells), std::ref(shapes), std::ref(lights), std::ref(count4), false));
 			}
 
