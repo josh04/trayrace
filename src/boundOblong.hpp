@@ -135,8 +135,17 @@ namespace tr {
             left.move(lengthDimension);
             right.move(lengthDimension);
         }
-	private:
+
+		double getEndDimension() const {
+			return endDimension;
+		}
+
+		double getSideDimension() const {
+			return lengthDimension;
+		}
+
 		plane3d up, down, front, back, left, right;
+	private:
 		double endDimension;
 		double lengthDimension;
 		Light::rgb col;

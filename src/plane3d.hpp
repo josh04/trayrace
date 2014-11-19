@@ -90,6 +90,10 @@ namespace tr {
             move();
         }
 
+		matrix3d getCoordMatrix() const {
+			return coordTrans;
+		}
+
 	protected:
         void move() {
             location = distance*((point3d(1, 0, 0)*zRotation(phi*(M_PI / 180.0))*yRotation(theta*(M_PI / 180.0))));
