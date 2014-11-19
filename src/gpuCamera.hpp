@@ -37,7 +37,7 @@ namespace tr {
 	class gpuCamera : public Camera {
 	public:
 		gpuCamera(std::shared_ptr<mush::opencl> context, point3d location, double theta, double phi, double horizontalFOV, unsigned int width, unsigned int height)
-			: Camera(), location({ { location.x, location.y, location.z } }), width(width), height(height), horizontalFOV(horizontalFOV) {
+			: Camera(), location({ { static_cast<cl_float>(location.x), static_cast<cl_float>(location.y), static_cast<cl_float>(location.z) } }), width(width), height(height), horizontalFOV(horizontalFOV) {
 			this->context = context;
 			ray_directions = (tr_point3d *)context->hostReadBuffer(height * width* sizeof(tr_point3d));
 

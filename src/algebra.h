@@ -3,7 +3,11 @@
 
 // dummy types for correctly sizing data to give opencl
 
+#ifdef _WIN32
 #include "CL/cl.h"
+#else
+#include <OpenCL/cl.h>
+#endif
 
 typedef cl_float tr_unit;
 typedef cl_float3 tr_point3d;
