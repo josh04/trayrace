@@ -570,11 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../../video-mush/src/exports.hpp"
-            timestampString = "430147355.498978"
+            timestampString = "438054098.178076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101">
+            startingLineNumber = "102"
+            endingLineNumber = "102">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1149,8 +1149,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "212"
             endingLineNumber = "212"
-            landmarkName = "class Cell"
-            landmarkType = "3">
+            landmarkName = "fire_reprojection(const rayProps&amp; props, const line3d&amp; ray, const motion3d&amp; cameraMotion, const double width, const double height, const double horizontalFOV)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1165,7 +1165,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "199"
             endingLineNumber = "199"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes shapes, Lights lights, std::atomic_long &amp;count, bool useProfile)"
+            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1565,7 +1565,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "131"
             endingLineNumber = "131"
-            landmarkName = "opencl::glImage(GLuint &amp;textureID, cl_mem_flags mem)"
+            landmarkName = "opencl::buffer(unsigned int size, cl_mem_flags mem)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1581,7 +1581,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "82"
             endingLineNumber = "82"
-            landmarkName = "opencl::floatImage(unsigned int width, unsigned int height, cl_mem_flags mem)"
+            landmarkName = "opencl::hostWriteBuffer(unsigned int size)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1613,7 +1613,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "179"
             endingLineNumber = "179"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes shapes, Lights lights, std::atomic_long &amp;count, bool useProfile)"
+            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1629,7 +1629,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
             endingLineNumber = "190"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes shapes, Lights lights, std::atomic_long &amp;count, bool useProfile)"
+            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1821,7 +1821,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "157"
             endingLineNumber = "157"
-            landmarkName = "activateMap(uint8_t const * map)"
+            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1837,7 +1837,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
             endingLineNumber = "156"
-            landmarkName = "activateMap(uint8_t const * map)"
+            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1853,8 +1853,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "155"
             endingLineNumber = "155"
-            landmarkName = "activateMap(uint8_t const * map)"
-            landmarkType = "5">
+            landmarkName = "class Camera"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1901,7 +1901,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "187"
             endingLineNumber = "187"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes shapes, Lights lights, std::atomic_long &amp;count, bool useProfile)"
+            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2633,7 +2633,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
             endingLineNumber = "176"
-            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes shapes, Lights lights, std::atomic_long &amp;count, bool useProfile)"
+            landmarkName = "preliminary_subSnap(int64_t start, int64_t num, shared_ptr&lt;Viewport&gt; depthMap, shared_ptr&lt;Viewport&gt; normalMap, shared_ptr&lt;Viewport&gt; colourMap, vector&lt;Cell&gt; &amp;cells, Shapes &amp;shapes, Lights &amp;lights, int64_t &amp;count, bool useProfile)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2649,8 +2649,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
             endingLineNumber = "246"
-            landmarkName = "profileStop(std::atomic_long &amp;count, int64_t &amp;oldPercentile, uint32_t &amp;percent)"
-            landmarkType = "5">
+            landmarkName = "class Camera"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2665,8 +2665,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "247"
             endingLineNumber = "247"
-            landmarkName = "profileStop(std::atomic_long &amp;count, int64_t &amp;oldPercentile, uint32_t &amp;percent)"
-            landmarkType = "5">
+            landmarkName = "class Camera"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3096,6 +3096,70 @@
             startingLineNumber = "192"
             endingLineNumber = "192"
             landmarkName = "main(int argc, char** argv)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435663916.743777"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "doTrayRaceThread(SceneStruct sconfig, std::atomic&lt;bool&gt; * stop, std::vector&lt;std::shared_ptr&lt;inputMethods&gt;&gt; inputPtrs, std::shared_ptr&lt;trayraceProcessor&gt; vmp)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435663956.182506"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "doTrayRaceThread(SceneStruct sconfig, std::atomic&lt;bool&gt; * stop, std::vector&lt;std::shared_ptr&lt;inputMethods&gt;&gt; inputPtrs, std::shared_ptr&lt;trayraceProcessor&gt; vmp)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435663981.56904"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "doTrayRaceThread(SceneStruct sconfig, std::atomic&lt;bool&gt; * stop, std::vector&lt;std::shared_ptr&lt;inputMethods&gt;&gt; inputPtrs, std::shared_ptr&lt;trayraceProcessor&gt; vmp)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../src/main.cpp"
+            timestampString = "435664656.199827"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "doTrayRaceThread(SceneStruct sconfig, std::atomic&lt;bool&gt; * stop, std::vector&lt;std::shared_ptr&lt;inputMethods&gt;&gt; inputPtrs, std::shared_ptr&lt;trayraceProcessor&gt; vmp)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
