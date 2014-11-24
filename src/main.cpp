@@ -24,7 +24,7 @@ using namespace tr;
 using std::make_shared;
 
 
-void runLog(std::atomic_int * over) {
+void runLog(std::atomic<bool> * over) {
 	const uint64_t size = 4096;
 	char output[size];
 	while (!(*over)) {
@@ -103,7 +103,7 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
 		// view
 		inptr = (unsigned char *)mainImage->lockInput();
 		if (inptr == nullptr) {break;}
-		memcpy(inptr, viewport->ptr(), size * 4 * sconfig.width * sconfig.height);
+//		memcpy(inptr, viewport->ptr(), size * 4 * sconfig.width * sconfig.height);
 		mainImage->unlockInput();
         
 		sconfig.waistRotation -= 1;
@@ -147,10 +147,10 @@ int main(int argc, char** argv)
 	// gohdr method
 	config.processEngine = mush::processEngine::homegrown;
 	// vlc output
-	//config.encodeEngine = mush::encodeEngine::none;
-	//config.outputEngine = mush::outputEngine::noOutput;
-	config.encodeEngine = mush::encodeEngine::ffmpeg;
-	config.outputEngine = mush::outputEngine::libavformatOutput;
+	config.encodeEngine = mush::encodeEngine::none;
+	config.outputEngine = mush::outputEngine::noOutput;
+	//config.encodeEngine = mush::encodeEngine::ffmpeg;
+	//config.outputEngine = mush::outputEngine::libavformatOutput;
 	// Show the goHDR gui?
 	config.show_gui = true;
 	// Sim2 preview window
@@ -189,7 +189,9 @@ int main(int argc, char** argv)
     std::shared_ptr<trayraceProcessor> vmp = make_shared<trayraceProcessor>(config.gamma, config.darken);
 
 	std::thread * thread = new std::thread(&doTrayRaceThread, sconfig, &stop, inputPtrs, vmp);
-
+    
+    std::thread * logThread = new std::thread(&runLog, &stop);
+    
     videoMushExecute(vmp);
     
     stop = true;

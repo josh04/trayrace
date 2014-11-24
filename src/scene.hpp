@@ -92,8 +92,9 @@ namespace tr {
 			shared_ptr<Light> light2 = make_shared<Light>(point3d(-9.0, 0.0, 0.0), Light::rgb(0.4), lampBallTwo);
 			lights->push_back(light);
 			lights->push_back(light2);
-            /*
-            const aiScene * scene = importer.ReadFile( "meshes/teapot.obj",
+            
+            importer = make_shared<Assimp::Importer>();
+            const aiScene * scene = importer->ReadFile( "meshes/teapot.obj",
                                                      aiProcess_CalcTangentSpace       |
                                                      aiProcess_Triangulate            |
                                                      aiProcess_JoinIdenticalVertices  |
@@ -120,8 +121,8 @@ namespace tr {
                 
                 triangle->reflective = 0.9;
                 
-                //shapes->push_back(triangle);
-            }*/
+                shapes->push_back(triangle);
+            }
             
 		}
 

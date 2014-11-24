@@ -66,8 +66,8 @@ namespace tr {
             
         }*/
         
-    private:
         point3d a, b, c;
+    private:
         
         point3d lineA, lineB, lineC;
     };

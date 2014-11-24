@@ -93,6 +93,10 @@ namespace tr {
 		matrix3d getCoordMatrix() const {
 			return coordTrans;
 		}
+        
+        double getDistance() const {
+            return distance;
+        }
 
 	protected:
         void move() {

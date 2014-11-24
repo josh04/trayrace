@@ -33,6 +33,8 @@
 		9E02EBA2199A2DF90064F06E /* motion3d.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = motion3d.hpp; path = ../src/motion3d.hpp; sourceTree = "<group>"; };
 		9E436FF01A1D1A700065844E /* cpuCamera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = cpuCamera.hpp; path = ../src/cpuCamera.hpp; sourceTree = "<group>"; };
 		9E436FF11A1D1A700065844E /* gpuCamera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = gpuCamera.hpp; path = ../src/gpuCamera.hpp; sourceTree = "<group>"; };
+		9E436FF71A1EC9940065844E /* algebra.cl */ = {isa = PBXFileReference; explicitFileType = sourcecode.opencl; fileEncoding = 4; name = algebra.cl; path = "../../video-mush/src/kernels/algebra.cl"; sourceTree = "<group>"; };
+		9E436FFC1A1ED0730065844E /* algebra.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = algebra.h; path = ../src/algebra.h; sourceTree = "<group>"; };
 		9E6029EA196368DE00F42D3C /* trayrace */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = trayrace; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E6029F61963690A00F42D3C /* boundBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = boundBox.hpp; path = ../src/boundBox.hpp; sourceTree = "<group>"; };
 		9E6029F71963690A00F42D3C /* boundOblong.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = boundOblong.hpp; path = ../src/boundOblong.hpp; sourceTree = "<group>"; };
@@ -171,6 +173,8 @@
 		9EC4478219927170004537F0 /* algebras */ = {
 			isa = PBXGroup;
 			children = (
+				9E436FFC1A1ED0730065844E /* algebra.h */,
+				9E436FF71A1EC9940065844E /* algebra.cl */,
 				9EC44783199A27A0004537F0 /* types.hpp */,
 				9E02EBA2199A2DF90064F06E /* motion3d.hpp */,
 				9E6029FE1963690A00F42D3C /* line3d.hpp */,
