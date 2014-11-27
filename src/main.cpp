@@ -103,7 +103,7 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
 		// view
 		inptr = (unsigned char *)mainImage->lockInput();
 		if (inptr == nullptr) {break;}
-//		memcpy(inptr, viewport->ptr(), size * 4 * sconfig.width * sconfig.height);
+		memcpy(inptr, viewport->ptr(), size * 4 * sconfig.width * sconfig.height);
 		mainImage->unlockInput();
         
 		sconfig.waistRotation -= 1;

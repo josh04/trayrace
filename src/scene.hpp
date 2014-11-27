@@ -44,8 +44,8 @@ namespace tr {
 			shapes = std::make_shared<vector<shared_ptr<Shape>>>();
 
 			auto context = videoMushGetContext();
-			camera = std::make_shared<gpuCamera>(context, config->CameraLocation, config->waistRotation, config->headTilt, config->horizontalFov, config->width, config->height);
-			//camera = std::make_shared<cpuCamera>(config->CameraLocation, config->waistRotation, config->headTilt, config->horizontalFov, config->width, config->height);
+			//camera = std::make_shared<gpuCamera>(context, config->CameraLocation, config->waistRotation, config->headTilt, config->horizontalFov, config->width, config->height);
+			camera = std::make_shared<cpuCamera>(config->CameraLocation, config->waistRotation, config->headTilt, config->horizontalFov, config->width, config->height);
 			lights = std::make_shared<vector<shared_ptr<Light>>>();
 
 			shared_ptr<Shape> redBall = std::static_pointer_cast<Shape>(make_shared<Sphere>(point3d(1, -3.5, 1), 2, std::make_unique<Paint>(Light::rgb(0.5, 0.0, 0.0))));
@@ -121,7 +121,7 @@ namespace tr {
                 
                 triangle->reflective = 0.9;
                 
-                shapes->push_back(triangle);
+                //shapes->push_back(triangle);
             }
             
 		}

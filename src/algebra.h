@@ -26,12 +26,6 @@ typedef struct  {
 } tr_line3d;
 
 typedef struct {
-	tr_point3d location;
-	tr_unit radius;
-//    float pad;
-} tr_sphere;
-
-typedef struct {
     tr_matrix3d coord_transform;
 	tr_unit distance;
 //    float pad;
