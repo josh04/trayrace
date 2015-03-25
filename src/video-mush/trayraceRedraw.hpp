@@ -34,7 +34,7 @@ public:
             putLog("redraw kernel: not enough buffers");
         }
         
-        discontinuities = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[0]);
+        discontinuities = std::dynamic_pointer_cast<mush::integerMapBuffer>(buffers[0]);
         if (discontinuities == nullptr) {
             putLog("redraw kernel: bad discont buffer");
             return;
@@ -96,7 +96,7 @@ private:
 
     uint8_t * getMap = nullptr;
     
-    std::shared_ptr<mush::imageBuffer> discontinuities;
+    std::shared_ptr<mush::integerMapBuffer> discontinuities;
     
     int count = 0;
     

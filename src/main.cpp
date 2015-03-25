@@ -39,15 +39,16 @@ void runLog(std::atomic_int * over) {
 	}
 };
 
-void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector<std::shared_ptr<inputMethods>> inputPtrs, std::shared_ptr<trayraceProcessor> vmp) {
+std::shared_ptr<trayraceProcessor> vmp = nullptr;
+
+void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop,
+                      std::shared_ptr<ViewportFloat> viewport, std::shared_ptr<ViewportFloat> depthMap,
+                      std::shared_ptr<ViewportFloat> normalMap, std::shared_ptr<ViewportFloat> colourMap) {
+    
+//    trayraceProcessor * vmpptr = vmp.get();
 	Scene scene{};
 	scene.init(&sconfig);
     
-	// load viewport
-	std::shared_ptr<ViewportFloat> viewport = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
-	std::shared_ptr<ViewportFloat> depthMap = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
-	std::shared_ptr<ViewportFloat> normalMap = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
-	std::shared_ptr<ViewportFloat> colourMap = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
     
 	// fire the rays from the viewport to the scene
 	//	- inc. intersection code
@@ -64,6 +65,12 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
 	while (counter < 359 && !(*stop)) {
 		++counter;
 		scene.preSnap(depthMap, normalMap, colourMap);
+        
+        depthMap->process();
+        normalMap->process();
+        colourMap->process();
+        
+        /*
         unsigned char * inptr = nullptr;
         
 		// depth
@@ -83,7 +90,7 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
 		if (inptr == nullptr) {break;}
 		memcpy(inptr, colourMap->ptr(), size * 4 * sconfig.width * sconfig.height);
 		inputPtrs[3]->unlockInput();
-        
+        */
         auto redraw = vmp->getRedraw();
         uint8_t * redrawMap = nullptr;
         {
@@ -96,12 +103,15 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
             scene.snap(redrawMap, viewport);
             redraw->getRedrawMap().outUnlock();
         }
-        
+        /*
 		// view
 		inptr = (unsigned char *) inputPtrs[0]->lockInput();
 		if (inptr == nullptr) {break;}
 		memcpy(inptr, viewport->ptr(), size * 4 * sconfig.width * sconfig.height);
 		inputPtrs[0]->unlockInput();
+        */
+        
+        viewport->process();
         
 		sconfig.waistRotation -= 1;
 		sconfig.CameraLocation = sconfig.CameraLocation * yRotation(-1.0*(M_PI/180.0));//+ point3d(0.5, 0, 0.5);
@@ -110,15 +120,15 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
 	}
 
     
-    std::shared_ptr<mush::ringBuffer> redraw = trayraceVideoMush->getRedraw();
+    std::shared_ptr<mush::ringBuffer> redraw = vmp->getRedraw();
     redraw->kill();
     redraw = nullptr;
-    vmp = nullptr;
-    
+//    vmp = nullptr;
+    /*
     for (int i = 0; i < inputPtrs.size(); ++i) {
         inputPtrs[i]->releaseInput();
     }
-    
+    */
 	// done!
 }
 
@@ -144,10 +154,10 @@ int main(int argc, char** argv)
 	// gohdr method
 //	config.processEngine = mush::processEngine::homegrown;
 	// vlc output
-	//config.encodeEngine = mush::encodeEngine::none;
-	//config.outputEngine = mush::outputEngine::noOutput;
-	config.encodeEngine = mush::encodeEngine::ffmpeg;
-	config.outputEngine = mush::outputEngine::libavformatOutput;
+	config.encodeEngine = mush::encodeEngine::none;
+	config.outputEngine = mush::outputEngine::noOutput;
+//    config.encodeEngine = mush::encodeEngine::x264;
+//	config.outputEngine = mush::outputEngine::libavformatOutput;
 	// Show the goHDR gui?
 	config.show_gui = true;
 	// Sim2 preview window
@@ -176,16 +186,19 @@ int main(int argc, char** argv)
 	// run function in thread
     videoMushInit(&config);
     
-    std::vector<std::shared_ptr<inputMethods>> inputPtrs;
+    // load viewport
+    std::shared_ptr<ViewportFloat> viewport = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
+    std::shared_ptr<ViewportFloat> depthMap = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
+    std::shared_ptr<ViewportFloat> normalMap = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
+    std::shared_ptr<ViewportFloat> colourMap = make_shared<ViewportFloat>(sconfig.width, sconfig.height);
+    std::dynamic_pointer_cast<mush::imageProcess>(viewport)->init(videoMushGetContext(), nullptr);
+    std::dynamic_pointer_cast<mush::imageProcess>(depthMap)->init(videoMushGetContext(), nullptr);
+    std::dynamic_pointer_cast<mush::imageProcess>(normalMap)->init(videoMushGetContext(), nullptr);
+    std::dynamic_pointer_cast<mush::imageProcess>(colourMap)->init(videoMushGetContext(), nullptr);
     
-    inputPtrs.push_back(videoMushAddInput());
-    inputPtrs.push_back(videoMushAddInput());
-    inputPtrs.push_back(videoMushAddInput());
-    inputPtrs.push_back(videoMushAddInput());
+    vmp = make_shared<trayraceProcessor>(viewport, depthMap, normalMap, colourMap);
     
-    std::shared_ptr<trayraceProcessor> vmp = make_shared<trayraceProcessor>(config.gamma, config.darken);
-    
-	std::thread * thread = new std::thread(&doTrayRaceThread, sconfig, &stop, inputPtrs, vmp);
+    std::thread * thread = new std::thread(&doTrayRaceThread, sconfig, &stop, viewport, depthMap, normalMap, colourMap);
     
     std::atomic<int> over(0);
 	
@@ -201,4 +214,5 @@ int main(int argc, char** argv)
     if (thread->joinable()) {
         thread->join();
     }
+    vmp = nullptr;
 }

@@ -16,6 +16,7 @@ namespace mush {
     class integerMapProcess;
     class frameStepper;
     class imageProcessor;
+    class quitEventHandler;
 }
 
 class edgeThreshold;
@@ -34,9 +35,8 @@ class trayraceCompose;
 
 class trayraceProcessor : public mush::imageProcessor {
 public:
-	trayraceProcessor(float gamma, float darken) :
-	gamma(gamma),
-	darken(darken) {
+    trayraceProcessor(std::shared_ptr<mush::imageBuffer> viewport, std::shared_ptr<mush::imageBuffer> depthMap,
+                      std::shared_ptr<mush::imageBuffer> normalMap, std::shared_ptr<mush::imageBuffer> colourMap ) : mush::imageProcessor(), _viewport(viewport), _depthMap(depthMap), _normalMap(normalMap), _colourMap(colourMap) {
         	}
     
 	~trayraceProcessor() {}
@@ -59,6 +59,11 @@ private:
 	shared_ptr<mush::opencl> context = nullptr;
 	shared_ptr<mush::ringBuffer> inputBuffer = nullptr;
     
+    shared_ptr <mush::imageBuffer> _viewport  = nullptr;
+    shared_ptr <mush::imageBuffer> _depthMap  = nullptr;
+    shared_ptr <mush::imageBuffer> _normalMap  = nullptr;
+    shared_ptr <mush::imageBuffer> _colourMap  = nullptr;
+    
     shared_ptr <mush::imageProcess> depthLaplace  = nullptr;
     shared_ptr <mush::imageProcess> depthEdgeSamples = nullptr;
     shared_ptr <mush::imageProcess> depthReconstruction = nullptr;
@@ -80,8 +85,7 @@ private:
     
     std::vector<std::shared_ptr<mush::frameStepper>> steppers;
     
-	float gamma;
-	float darken;
+    std::shared_ptr<mush::quitEventHandler> quitHandler = nullptr;
     
 	cl::Event event;
 	cl::CommandQueue * queue;

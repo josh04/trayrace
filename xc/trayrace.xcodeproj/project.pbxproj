@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		9E6574CA1967270A000F7D46 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9E6029FF1963690A00F42D3C /* main.cpp */; };
-		9EA6774419A3AD0A00BC23E4 /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA6774319A3AD0A00BC23E4 /* OpenCL.framework */; };
+		9E8DF6181AC3081E0017A24F /* Video Mush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8DF6171AC3081E0017A24F /* Video Mush.framework */; };
+		9E8DF61A1AC308210017A24F /* OpenCL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8DF6191AC308210017A24F /* OpenCL.framework */; };
+		9E8DF61D1AC30A700017A24F /* libboost_system-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8DF61B1AC30A700017A24F /* libboost_system-mt.a */; };
+		9E8DF61E1AC30A700017A24F /* libboost_thread-mt.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E8DF61C1AC30A700017A24F /* libboost_thread-mt.a */; };
 		9EAA1AEE19BE3EEF000AD7AD /* trayraceProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9EAA1AEB19BE3C83000AD7AD /* trayraceProcessor.cpp */; };
 		9EB2191019E9EAC8007F39D3 /* libassimp.3.1.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB2190F19E9EAC8007F39D3 /* libassimp.3.1.1.dylib */; };
 		9EB2191219E9EFA0007F39D3 /* teapot.obj in Copy Files */ = {isa = PBXBuildFile; fileRef = 9EB2191119E9EFA0007F39D3 /* teapot.obj */; };
-		9EC15FA819F72F1E00EEE7E0 /* Video Mush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EC15FA719F72F1E00EEE7E0 /* Video Mush.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -63,14 +65,16 @@
 		9E64544719A3A550007E9D6A /* diffuseProcess.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; lineEnding = 0; name = diffuseProcess.hpp; path = "../src/video-mush/diffuseProcess.hpp"; sourceTree = "<group>"; };
 		9E64544819A3A550007E9D6A /* getDiscontinuities.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = getDiscontinuities.hpp; path = "../src/video-mush/getDiscontinuities.hpp"; sourceTree = "<group>"; };
 		9E64544919A3A550007E9D6A /* trayraceRedraw.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = trayraceRedraw.hpp; path = "../src/video-mush/trayraceRedraw.hpp"; sourceTree = "<group>"; };
+		9E8DF6171AC3081E0017A24F /* Video Mush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Video Mush.framework"; path = "../../../Library/Developer/Xcode/DerivedData/trayrace-ectwjrnhmycigocvbzryfrszvzzz/Build/Products/Debug/Video Mush.framework"; sourceTree = "<group>"; };
+		9E8DF6191AC308210017A24F /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
+		9E8DF61B1AC30A700017A24F /* libboost_system-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_system-mt.a"; path = "lib/libboost_system-mt.a"; sourceTree = "<group>"; };
+		9E8DF61C1AC30A700017A24F /* libboost_thread-mt.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libboost_thread-mt.a"; path = "lib/libboost_thread-mt.a"; sourceTree = "<group>"; };
 		9E978C7019E7060500EF4714 /* triangle3d.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = triangle3d.hpp; path = ../src/triangle3d.hpp; sourceTree = "<group>"; };
-		9EA6774319A3AD0A00BC23E4 /* OpenCL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenCL.framework; path = System/Library/Frameworks/OpenCL.framework; sourceTree = SDKROOT; };
 		9EA6774619A4CA0C00BC23E4 /* trayraceCompose.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = trayraceCompose.hpp; path = "../src/video-mush/trayraceCompose.hpp"; sourceTree = "<group>"; };
 		9EAA1AEB19BE3C83000AD7AD /* trayraceProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = trayraceProcessor.cpp; path = "../src/video-mush/trayraceProcessor.cpp"; sourceTree = SOURCE_ROOT; };
 		9EAD22C619BC9B35008806F3 /* trayraceUpsample.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = trayraceUpsample.hpp; path = "../src/video-mush/trayraceUpsample.hpp"; sourceTree = "<group>"; };
 		9EB2190F19E9EAC8007F39D3 /* libassimp.3.1.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.1.1.dylib; path = lib/libassimp.3.1.1.dylib; sourceTree = "<group>"; };
 		9EB2191119E9EFA0007F39D3 /* teapot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = teapot.obj; path = ../meshes/teapot.obj; sourceTree = "<group>"; };
-		9EC15FA719F72F1E00EEE7E0 /* Video Mush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Video Mush.framework"; path = "../../../Library/Developer/Xcode/DerivedData/trayrace-ectwjrnhmycigocvbzryfrszvzzz/Build/Products/Release/Video Mush.framework"; sourceTree = "<group>"; };
 		9EC44783199A27A0004537F0 /* types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = types.hpp; path = ../src/types.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,8 +83,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9EC15FA819F72F1E00EEE7E0 /* Video Mush.framework in Frameworks */,
-				9EA6774419A3AD0A00BC23E4 /* OpenCL.framework in Frameworks */,
+				9E8DF61A1AC308210017A24F /* OpenCL.framework in Frameworks */,
+				9E8DF6181AC3081E0017A24F /* Video Mush.framework in Frameworks */,
+				9E8DF61D1AC30A700017A24F /* libboost_system-mt.a in Frameworks */,
+				9E8DF61E1AC30A700017A24F /* libboost_thread-mt.a in Frameworks */,
 				9EB2191019E9EAC8007F39D3 /* libassimp.3.1.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,10 +97,12 @@
 		9E6029E1196368DE00F42D3C = {
 			isa = PBXGroup;
 			children = (
-				9EC15FA719F72F1E00EEE7E0 /* Video Mush.framework */,
+				9E8DF61B1AC30A700017A24F /* libboost_system-mt.a */,
+				9E8DF61C1AC30A700017A24F /* libboost_thread-mt.a */,
+				9E8DF6191AC308210017A24F /* OpenCL.framework */,
+				9E8DF6171AC3081E0017A24F /* Video Mush.framework */,
 				9EB2191119E9EFA0007F39D3 /* teapot.obj */,
 				9EB2190F19E9EAC8007F39D3 /* libassimp.3.1.1.dylib */,
-				9EA6774319A3AD0A00BC23E4 /* OpenCL.framework */,
 				9E6029EC196368DE00F42D3C /* trayrace */,
 				9E6029EB196368DE00F42D3C /* Products */,
 			);
@@ -136,13 +144,13 @@
 			isa = PBXGroup;
 			children = (
 				9E64544419A3A550007E9D6A /* trayraceProcessor.hpp */,
+				9EAA1AEB19BE3C83000AD7AD /* trayraceProcessor.cpp */,
 				9E64544619A3A550007E9D6A /* edgeThreshold.hpp */,
 				9E64544719A3A550007E9D6A /* diffuseProcess.hpp */,
 				9E64544819A3A550007E9D6A /* getDiscontinuities.hpp */,
 				9E64544919A3A550007E9D6A /* trayraceRedraw.hpp */,
 				9EA6774619A4CA0C00BC23E4 /* trayraceCompose.hpp */,
 				9EAD22C619BC9B35008806F3 /* trayraceUpsample.hpp */,
-				9EAA1AEB19BE3C83000AD7AD /* trayraceProcessor.cpp */,
 			);
 			name = "video mush";
 			sourceTree = "<group>";
@@ -309,14 +317,7 @@
 		9E6029F4196368DE00F42D3C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++1y";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/video-mush-gbhvapskrdnjskefzfsrqzhwhrrm/Build/Products/Debug",
-					"/Users/josh04/Development/video-mush/xc/media-encoder/build/Debug",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/trayrace-ectwjrnhmycigocvbzryfrszvzzz/Build/Products/Debug",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/trayrace-ectwjrnhmycigocvbzryfrszvzzz/Build/Products/Release",
-				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -327,6 +328,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					/opt/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -335,14 +337,7 @@
 		9E6029F5196368DE00F42D3C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++1y";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/video-mush-gbhvapskrdnjskefzfsrqzhwhrrm/Build/Products/Debug",
-					"/Users/josh04/Development/video-mush/xc/media-encoder/build/Debug",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/trayrace-ectwjrnhmycigocvbzryfrszvzzz/Build/Products/Debug",
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/trayrace-ectwjrnhmycigocvbzryfrszvzzz/Build/Products/Release",
-				);
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -353,6 +348,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib",
+					/opt/local/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
