@@ -12,6 +12,8 @@
 #include <Video Mush/ConfigStruct.hpp>
 #include <Video Mush/exports.hpp>
 
+#include <boost/thread.hpp>
+
 #include "scene.hpp"
 #include "viewport8bit.hpp"
 #include "viewportFloat.hpp"
@@ -108,7 +110,7 @@ void doTrayRaceThread(SceneStruct sconfig, std::atomic<bool> * stop, std::vector
 	}
 
     
-    std::shared_ptr<mush::imageBuffer> redraw = vmp->getRedraw();
+    std::shared_ptr<mush::ringBuffer> redraw = trayraceVideoMush->getRedraw();
     redraw->kill();
     redraw = nullptr;
     vmp = nullptr;
@@ -140,7 +142,7 @@ int main(int argc, char** argv)
 	// external input
 	config.inputEngine = mush::inputEngine::externalInput;
 	// gohdr method
-	config.processEngine = mush::processEngine::homegrown;
+//	config.processEngine = mush::processEngine::homegrown;
 	// vlc output
 	//config.encodeEngine = mush::encodeEngine::none;
 	//config.outputEngine = mush::outputEngine::noOutput;

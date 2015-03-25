@@ -132,7 +132,7 @@ void trayraceProcessor::init(std::shared_ptr<mush::opencl> context, std::vector<
     //_guiBuffers.push_back(imageBuffer);
 }
 
-void trayraceProcessor::doFrame() {
+void trayraceProcessor::process() {
     
     depthDelay->process();
     //        steppers[1]->process();
@@ -166,8 +166,8 @@ std::vector<std::shared_ptr<mush::ringBuffer>> trayraceProcessor::getBuffers() {
     return buffers;
 }
 
-std::vector<std::shared_ptr<mush::imageBuffer>> trayraceProcessor::getGuiBuffers() {
-    const std::vector<std::shared_ptr<mush::imageBuffer>> buffs = _guiBuffers;
+std::vector<std::shared_ptr<mush::guiAccessible>> trayraceProcessor::getGuiBuffers() {
+    const std::vector<std::shared_ptr<mush::guiAccessible>> buffs = _guiBuffers;
     _guiBuffers.clear();
     return buffs;
 }
@@ -178,7 +178,7 @@ std::vector<std::shared_ptr<mush::frameStepper>> trayraceProcessor::getFrameStep
 
 void trayraceProcessor::go() {
     while (inputBuffer->good()) {
-        doFrame();
+        process();
     }
     
     

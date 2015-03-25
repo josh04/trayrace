@@ -43,12 +43,12 @@ public:
     
     void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers);
     
-	void doFrame();
+	void process();
     
 	static const std::vector<std::string> listKernels();
     
     std::vector<std::shared_ptr<mush::ringBuffer>> getBuffers();
-    std::vector<std::shared_ptr<mush::imageBuffer>> getGuiBuffers();
+    std::vector<std::shared_ptr<mush::guiAccessible>> getGuiBuffers();
     std::vector<std::shared_ptr<mush::frameStepper>> getFrameSteppers();
     
     void go();
@@ -76,7 +76,7 @@ private:
     
 	std::vector<std::shared_ptr<mush::imageBuffer>> _nulls;
     
-    std::vector<std::shared_ptr<mush::imageBuffer>> _guiBuffers;
+    std::vector<std::shared_ptr<mush::guiAccessible>> _guiBuffers;
     
     std::vector<std::shared_ptr<mush::frameStepper>> steppers;
     
