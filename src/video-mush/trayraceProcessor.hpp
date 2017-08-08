@@ -25,11 +25,11 @@ class trayraceRedraw;
 class trayraceUpsample;
 class trayraceCompose;
 
-#include <Video Mush/opencl.hpp>
+#include <Mush Core/opencl.hpp>
 //#define _PROFILE 3
-#include <Video Mush/profile.hpp>
+#include <profile.hpp>
 
-#include <Video Mush/imageProcessor.hpp>
+#include <Mush Core/imageProcessor.hpp>
 #include <thread>
 
 class trayraceProcessor : public mush::imageProcessor {
@@ -41,15 +41,15 @@ public:
     
 	~trayraceProcessor() {}
     
-    void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers);
+    void init(std::shared_ptr<mush::opencl> context, const std::initializer_list<std::shared_ptr<mush::ringBuffer>> buffers) override;
     
-	void doFrame();
+	void process() override;
     
 	static const std::vector<std::string> listKernels();
     
-    std::vector<std::shared_ptr<mush::ringBuffer>> getBuffers();
-    std::vector<std::shared_ptr<mush::imageBuffer>> getGuiBuffers();
-    std::vector<std::shared_ptr<mush::frameStepper>> getFrameSteppers();
+    const std::vector<std::shared_ptr<mush::ringBuffer>> getBuffers() const override;
+    std::vector<std::shared_ptr<mush::guiAccessible>> getGuiBuffers() override;
+    std::vector<std::shared_ptr<mush::frameStepper>> getFrameSteppers() const override;
     
     void go();
                                   
@@ -76,7 +76,7 @@ private:
     
 	std::vector<std::shared_ptr<mush::imageBuffer>> _nulls;
     
-    std::vector<std::shared_ptr<mush::imageBuffer>> _guiBuffers;
+    std::vector<std::shared_ptr<mush::guiAccessible>> _guiBuffers;
     
     std::vector<std::shared_ptr<mush::frameStepper>> steppers;
     

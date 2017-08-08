@@ -8,9 +8,9 @@
 #include <atomic>
 #include <math.h>
 
-#include <Video Mush/imageBuffer.hpp>
+#include <Mush Core/imageBuffer.hpp>
 
-#include <Video Mush/opencl.hpp>
+#include <Mush Core/opencl.hpp>
 
 #include "point3d.hpp"
 #include "cell.hpp"

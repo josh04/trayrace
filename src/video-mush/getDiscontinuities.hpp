@@ -9,7 +9,8 @@
 #ifndef video_mush_gmotionProcess_hpp
 #define video_mush_gmotionProcess_hpp
 
-#include <Video Mush/integerMapProcess.hpp>
+#include <Mush Core/integerMapProcess.hpp>
+#include <Mush Core/tagInGui.hpp>
 
 class getDiscontinuities : public mush::integerMapProcess {
 public:
@@ -21,24 +22,24 @@ public:
         
     }
     
-    void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers) {
+    void init(std::shared_ptr<mush::opencl> context, std::initializer_list<std::shared_ptr<mush::ringBuffer>> buffers) override {
         
         discontinuities = context->getKernel("discontinuities");
         copyImage = context->getKernel("copyImage");
     
-        depthDiff = context->getKernel("depthDiff");
+        //depthDiff = context->getKernel("depthDiff");
         
         if (buffers.size() < 2) {
             putLog("discontinuities kernel: not enough buffers");
         }
         
-        motionVectors = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[0]);
+        motionVectors = std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[0]);
         if (motionVectors == nullptr) {
             putLog("discontinuities kernel: bad motion buffer");
             return;
         }
         
-        depth = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]);
+        depth = std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[1]);
         if (depth == nullptr) {
             putLog("discontinuities kernel: bad depth buffer");
             return;
@@ -48,9 +49,8 @@ public:
         
         previousDepth = context->floatImage(_width, _height);
         
-        addItem((unsigned char *)context->buffer(_width*_height*sizeof(cl_uchar)));
+        addItem(context->buffer(_width*_height*sizeof(cl_uchar)));
         
-        discontinuities->setArg(0, *((cl::Buffer *)_getMem(0)));
         
         queue = context->getQueue();
     }
@@ -59,46 +59,49 @@ public:
         inLock();
         cl::Event event;
         
-        cl::Image2D const * mot = motionVectors->imageOutLock();
+        auto mot = motionVectors->outLock();
         if (mot == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D const * inDepth = depth->imageOutLock();
+        auto inDepth = depth->outLock();
         if (inDepth == nullptr) {
             release();
             return;
         }
-        
-        discontinuities->setArg(1, *mot);
-        discontinuities->setArg(2, *inDepth);
-//        discontinuities->setArg(3, *in);
+
+		discontinuities->setArg(0, _getMem(0).get_buffer());
+        discontinuities->setArg(1, mot.get_image());
+        discontinuities->setArg(2, inDepth.get_image());
+        discontinuities->setArg(3, *temp_image);
         queue->enqueueNDRangeKernel(*discontinuities, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
-        inUnlock(mot, inDepth);
+		inUnlock();
+        //inUnlock(mot, inDepth);
         
         motionVectors->outUnlock();
         
         depth->outUnlock();
         
     }
-    
-    virtual void inUnlock(cl::Image2D const * mot, cl::Image2D const * depth) {
+    /*
+    virtual void inUnlock(mush::buffer& mot, mush::buffer& depth) {
         if (getTagInGuiMember() && tagGui != nullptr) {
             
             depthDiff->setArg(0, *temp_image);
-            depthDiff->setArg(1, *mot);
-            depthDiff->setArg(2, *depth);
+            depthDiff->setArg(1, mot.get_image());
+            depthDiff->setArg(2, depth.get_image());
             cl::Event event;
             queue->enqueueNDRangeKernel(*depthDiff, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
             event.wait();
-            tagGui->copyImageIntoGuiBuffer(getTagInGuiIndex(), temp_image);
+			mush::buffer temp{ *temp_image };
+            tagGui->copyImageIntoGuiBuffer(getTagInGuiIndex(), temp);
         }
         ringBuffer::inUnlock();
     }
-    
+    */
     
 private:
     cl::CommandQueue * queue = nullptr;
@@ -109,7 +112,7 @@ private:
     
     cl::Image2D * previousDepth = nullptr;
     
-    std::shared_ptr<mush::imageBuffer> motionVectors;
-    std::shared_ptr<mush::imageBuffer> depth;
+    mush::registerContainer<mush::imageBuffer> motionVectors;
+	mush::registerContainer<mush::imageBuffer> depth;
 };
 #endif

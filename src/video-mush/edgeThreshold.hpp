@@ -9,7 +9,7 @@
 #ifndef video_mush_laplaceEncoderProcess_hpp
 #define video_mush_laplaceEncoderProcess_hpp
 
-#include <Video Mush/imageProcess.hpp>
+#include <Mush Core/imageProcess.hpp>
 
 class edgeThreshold : public mush::imageProcess {
 public:
@@ -21,7 +21,7 @@ public:
         
     }
     
-    void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers) {
+    void init(std::shared_ptr<mush::opencl> context, std::initializer_list<std::shared_ptr<mush::ringBuffer>> buffers) override {
         
         threshold = context->getKernel("edge_threshold");
         samples = context->getKernel("edge_samples");
@@ -31,7 +31,7 @@ public:
             putLog("laplace kernel: not enough buffers");
         }
         
-        imageBuffe = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[0]);
+        imageBuffe = std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[0]);
         if (imageBuffe == nullptr) {
             putLog("edge threshold kernel: bad image buffer");
             return;
@@ -39,18 +39,17 @@ public:
         
         imageBuffe->getParams(_width, _height, _size);
         
-        laplaceBuffer = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]);
+        laplaceBuffer = std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[1]);
         if (laplaceBuffer == nullptr) {
             putLog("edge threshold kernel: bad edge buffer");
             return;
         }
         
-        addItem((unsigned char *)context->floatImage(_width, _height));
+        addItem(context->floatImage(_width, _height));
         
         
-        clear->setArg(0, *_getImageMem(0));
-        threshold->setArg(2, *_getImageMem(0));
-        samples->setArg(1, *_getImageMem(0));
+        clear->setArg(0, _getImageMem(0));
+        samples->setArg(1, _getImageMem(0));
         queue = context->getQueue();
     }
     
@@ -61,24 +60,26 @@ public:
         queue->enqueueNDRangeKernel(*clear, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
-        cl::Image2D const * image = imageBuffe->imageOutLock();
+        auto image = imageBuffe->outLock();
         if (image == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D const * laplace = laplaceBuffer->imageOutLock();
+		auto laplace = laplaceBuffer->outLock();
         if (laplace == nullptr) {
             release();
             return;
         }
         
-        threshold->setArg(0, *image);
-        threshold->setArg(1, *laplace);
+        threshold->setArg(0, image.get_image());
+        threshold->setArg(1, laplace.get_image());
+		threshold->setArg(2, _getImageMem(0));
+		threshold->setArg(3, 0.1f);
         queue->enqueueNDRangeKernel(*threshold, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
-        samples->setArg(0, *image);
+        samples->setArg(0, image.get_image());
         queue->enqueueNDRangeKernel(*samples, cl::NullRange, cl::NDRange((_width - (_width % 32))/32, (_height - (_height %32))/32), cl::NullRange, NULL, &event);
         event.wait();
         
@@ -93,8 +94,8 @@ private:
     cl::Kernel * samples = nullptr;
     cl::Kernel * clear = nullptr;
     
-    std::shared_ptr<mush::imageBuffer> laplaceBuffer;
-    std::shared_ptr<mush::imageBuffer> imageBuffe;
+    mush::registerContainer<mush::imageBuffer> laplaceBuffer;
+	mush::registerContainer<mush::imageBuffer> imageBuffe;
 };
 
 #endif

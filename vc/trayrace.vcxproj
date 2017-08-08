@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -27,26 +27,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -109,14 +109,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\code\trayrace\thirdparty\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\trayrace\vc\x64\Debug\bin\include;G:\code\boost-trunk;G:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\code\video-mush\vc\x64\Release\bin\include;C:\code\jon-player\libazure\include;C:\code\jon-player\libazure\thirdparty\include;C:\code\video-mush\thirdparty\include;C:\code\RadeonRays_SDK;C:\code\video-mush\src;C:\code\trayrace\thirdparty\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\video-mush\src\core\include;f:\code\boost-trunk;f:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\code\trayrace\thirdparty\lib\x64\Debug;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\lib\x64;G:\code\boost-trunk\lib\x64;G:\code\tiff-4.0.3\libtiff;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>assimpd.lib;libtiff_i.lib;opencl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\code\video-mush\thirdparty\x64\lib\Debug;C:\code\video-mush\vc\x64\Debug\bin;C:\code\trayrace\thirdparty\lib\x64\Debug;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\lib\x64;G:\code\boost-trunk\lib\x64;G:\code\tiff-4.0.3\libtiff;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libtiff.lib;opencl.lib;assimpd.lib;mush-core.lib;video-mush.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -147,15 +147,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>C:\code\trayrace\thirdparty\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\trayrace\vc\x64\Release\bin\include;G:\code\boost-trunk;G:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\code\video-mush\vc\x64\Release\bin\include;C:\code\jon-player\libazure\include;C:\code\jon-player\libazure\thirdparty\include;C:\code\video-mush\thirdparty\include;C:\code\RadeonRays_SDK;C:\code\video-mush\src;C:\code\trayrace\thirdparty\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\include;C:\code\video-mush\src\core\include;f:\code\boost-trunk;f:\code\tiff-4.0.3\libtiff;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>C:\code\trayrace\thirdparty\lib\x64\Release;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\lib\x64;G:\code\boost-trunk\lib\x64;G:\code\tiff-4.0.3\libtiff;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>libtiff_i.lib;opencl.lib;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\code\video-mush\thirdparty\x64\lib\Release;C:\code\video-mush\vc\x64\Release\bin;C:\code\trayrace\thirdparty\lib\x64\Release;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v6.0\lib\x64;G:\code\boost-trunk\lib\x64;G:\code\tiff-4.0.3\libtiff;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libtiff.lib;opencl.lib;assimp.lib;mush-core.lib;video-mush.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -198,16 +198,6 @@
     <ClInclude Include="..\src\viewport.hpp" />
     <ClInclude Include="..\src\viewport8bit.hpp" />
     <ClInclude Include="..\src\viewportFloat.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\video-mush\vc\compressor.vcxproj">
-      <Project>{5719be3d-c333-443f-b14e-bb6566f4e65a}</Project>
-      <Private>true</Private>
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
-      <LinkLibraryDependencies>true</LinkLibraryDependencies>
-      <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

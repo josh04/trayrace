@@ -8,12 +8,15 @@
 
 #include <thread>
 
-#include <Video Mush/opencl.hpp>
-#include <Video Mush/nullProcess.hpp>
-#include <Video Mush/laplaceProcess.hpp>
-#include <Video Mush/delayProcess.hpp>
+#include <Mush Core/opencl.hpp>
+#include <Mush Core/mushMemoryToGpu.hpp>
+#include <nullProcess.hpp>
+#include <laplaceProcess.hpp>
+#include <delayProcess.hpp>
 
-#include <Video Mush/imageProcessor.hpp>
+#include <Mush Core/imageProcessor.hpp>
+#include <Mush Core/frameStepper.hpp>
+#include <Mush Core/SetThreadName.hpp>
 
 #include "edgeThreshold.hpp"
 #include "diffuseProcess.hpp"
@@ -24,87 +27,67 @@
 
 #include "trayraceProcessor.hpp"
 
-void trayraceProcessor::init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers) {
-    
-    if (buffers.size() < 1) {
-        putLog("No buffers at encoder");
-    }
-    
-    steppers.push_back(std::make_shared<mush::frameStepper>());
-    
-    // take the three prelim buffers first
-    
-    // and send back the redrawmap
-    
-    depthDelay = make_shared<mush::delayProcess>();
-    depthDelay->init(context, std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
-    
-    discontinuities = make_shared<getDiscontinuities>();
-    std::vector<std::shared_ptr<mush::ringBuffer>> motBuff;
-    motBuff.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
-    motBuff.push_back(depthDelay);
-    discontinuities->init(context, motBuff);
-    
-    redraw = make_shared<trayraceRedraw>();
-    redraw->init(context, discontinuities);
-    
-    inputBuffer = buffers[0];
-    
-    upsample = make_shared<trayraceUpsample>();
-    std::vector<std::shared_ptr<mush::ringBuffer>> upsampleBuff;
-    upsampleBuff.push_back(redraw);
-    upsampleBuff.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[2]));
-    buffers[1]->addRepeat();
-    upsampleBuff.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
-    upsampleBuff.push_back(inputBuffer);
-    upsample->init(context, upsampleBuff);
-    
-    compose = make_shared<trayraceCompose>();
-    std::vector<std::shared_ptr<mush::ringBuffer>> composeBuff;
-    inputBuffer->addRepeat();
-    composeBuff.push_back(inputBuffer);
-    discontinuities->addRepeat();
-    composeBuff.push_back(discontinuities);
-    buffers[3]->addRepeat();
-    composeBuff.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
-    composeBuff.push_back(upsample);
-    compose->init(context, composeBuff);
-    
-    // then we can get the main image and start workin'
-    
-    depthLaplace = make_shared<laplaceProcess>();
-    buffers[1]->addRepeat();
-    depthLaplace->init(context, std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
-    
-    depthEdgeSamples = make_shared<edgeThreshold>();
-    std::vector<std::shared_ptr<mush::ringBuffer>> edgeBuff;
-    buffers[1]->addRepeat();
-    edgeBuff.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
-    edgeBuff.push_back(depthLaplace);
-    depthEdgeSamples->init(context, edgeBuff);
-    
-    depthReconstruction = make_shared<diffuseProcess>();
-    depthReconstruction->init(context, depthEdgeSamples);
-    
-    motionLaplace = make_shared<laplaceProcess>();
-    buffers[3]->addRepeat();
-    motionLaplace->init(context, std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
-    
-    motionEdgeSamples = make_shared<edgeThreshold>();
-    std::vector<std::shared_ptr<mush::ringBuffer>> edgeBuff2;
-    buffers[3]->addRepeat();
-    edgeBuff2.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
-    edgeBuff2.push_back(motionLaplace);
-    motionEdgeSamples->init(context, edgeBuff2);
+void trayraceProcessor::init(std::shared_ptr<mush::opencl> context, std::initializer_list<std::shared_ptr<mush::ringBuffer>> buffers) {
+	if (buffers.size() < 4) {
+		putLog("No buffers at encoder");
+	}
+	auto buf1 = std::dynamic_pointer_cast<mush::memoryToGpu>(buffers.begin()[0]);
+	auto buf2 = std::dynamic_pointer_cast<mush::memoryToGpu>(buffers.begin()[1]);
+	auto buf3 = std::dynamic_pointer_cast<mush::memoryToGpu>(buffers.begin()[2]);
+	auto buf4 = std::dynamic_pointer_cast<mush::memoryToGpu>(buffers.begin()[3]);
+	buf1->init(context, {});
+	buf2->init(context, {});
+	buf3->init(context, {});
+	buf4->init(context, {});
+
+	steppers.push_back(std::make_shared<mush::frameStepper>());
+
+	// take the three prelim buffers first
+
+	// and send back the redrawmap
+
+	depthDelay = make_shared<mush::delayProcess>();
+	depthDelay->init(context, std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[1]));
+
+	discontinuities = make_shared<getDiscontinuities>();
+	discontinuities->init(context, {buffers.begin()[3], depthDelay});
+
+	redraw = make_shared<trayraceRedraw>();
+	redraw->init(context, discontinuities);
+
+	inputBuffer = buffers.begin()[0];
+
+	upsample = make_shared<trayraceUpsample>();
+	upsample->init(context, {redraw, buffers.begin()[2], buffers.begin()[1], inputBuffer});
+
+	compose = make_shared<trayraceCompose>();
+	compose->init(context, {inputBuffer, discontinuities, buffers.begin()[3], upsample});
+
+	// then we can get the main image and start workin'
+
+	depthLaplace = make_shared<laplaceProcess>();
+	depthLaplace->init(context, std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[1]));
+
+	depthEdgeSamples = make_shared<edgeThreshold>();
+	depthEdgeSamples->init(context, { buffers.begin()[1], depthLaplace });
+
+	depthReconstruction = make_shared<diffuseProcess>();
+	depthReconstruction->init(context, depthEdgeSamples);
+
+	motionLaplace = make_shared<laplaceProcess>();
+	motionLaplace->init(context, std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[3]));
+
+	motionEdgeSamples = make_shared<edgeThreshold>();
+	motionEdgeSamples->init(context, {buffers.begin()[3], motionLaplace});
     
     motionReconstruction = make_shared<diffuseProcess>();
     motionReconstruction->init(context, motionEdgeSamples);
     
     _guiBuffers.push_back(compose);
     _guiBuffers.push_back(upsample);
-    _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[1]));
-    _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]));
-    _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers[2]));
+    _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[1]));
+    _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[3]));
+    _guiBuffers.push_back(std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[2]));
     
     _guiBuffers.push_back(depthLaplace);
     _guiBuffers.push_back(depthEdgeSamples);
@@ -133,7 +116,7 @@ void trayraceProcessor::init(std::shared_ptr<mush::opencl> context, std::vector<
     //_guiBuffers.push_back(imageBuffer);
 }
 
-void trayraceProcessor::doFrame() {
+void trayraceProcessor::process() {
     
     depthDelay->process();
     //        steppers[1]->process();
@@ -161,25 +144,26 @@ const std::vector<std::string> trayraceProcessor::listKernels() {
     return kernels;
 }
 
-std::vector<std::shared_ptr<mush::ringBuffer>> trayraceProcessor::getBuffers() {
+const std::vector<std::shared_ptr<mush::ringBuffer>> trayraceProcessor::getBuffers() const {
     std::vector<std::shared_ptr<mush::ringBuffer>> buffers;
     buffers.push_back(compose);
     return buffers;
 }
 
-std::vector<std::shared_ptr<mush::imageBuffer>> trayraceProcessor::getGuiBuffers() {
-    const std::vector<std::shared_ptr<mush::imageBuffer>> buffs = _guiBuffers;
+std::vector<std::shared_ptr<mush::guiAccessible>> trayraceProcessor::getGuiBuffers() {
+    auto buffs = _guiBuffers;
     _guiBuffers.clear();
     return buffs;
 }
 
-std::vector<std::shared_ptr<mush::frameStepper>> trayraceProcessor::getFrameSteppers() {
+std::vector<std::shared_ptr<mush::frameStepper>> trayraceProcessor::getFrameSteppers() const {
     return steppers;
 }
 
 void trayraceProcessor::go() {
+	SetThreadName("Reproj");
     while (inputBuffer->good()) {
-        doFrame();
+        process();
     }
     
     

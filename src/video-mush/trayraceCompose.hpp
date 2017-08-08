@@ -10,7 +10,7 @@
 #define trayrace_trayraceCompose_hpp
 
 
-#include <Video Mush/imageProcess.hpp>
+#include <Mush Core/imageProcess.hpp>
 
 class trayraceCompose : public mush::imageProcess {
 public:
@@ -22,7 +22,7 @@ public:
         
     }
     
-    void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers) {
+    void init(std::shared_ptr<mush::opencl> context, std::initializer_list<std::shared_ptr<mush::ringBuffer>> buffers) override {
         
 //        copyImage = context->getKernel("copyImage");
         //        fromCache = context->getKernel("fromCache");
@@ -35,26 +35,26 @@ public:
             putLog("compose kernel: not enough buffers");
         }
         
-        rays = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[0]);
-        if (rays == nullptr) {
+        rays = std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[0]);
+        if (rays.get() == nullptr) {
             putLog("compose kernel: bad ray buffer");
             return;
         }
         
-        maps = std::dynamic_pointer_cast<mush::ringBuffer>(buffers[1]);
-        if (maps == nullptr) {
+        maps = std::dynamic_pointer_cast<mush::ringBuffer>(buffers.begin()[1]);
+        if (maps.get() == nullptr) {
             putLog("compose kernel: bad map buffer");
             return;
         }
         
-        motion = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[2]);
-        if (motion == nullptr) {
+        motion = std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[2]);
+        if (motion.get() == nullptr) {
             putLog("compose kernel: bad mption buffer");
             return;
         }
         
-        upsample = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[3]);
-        if (upsample == nullptr) {
+        upsample = std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[3]);
+        if (upsample.get() == nullptr) {
             putLog("compose kernel: bad upsample buffer");
             return;
         }
@@ -65,14 +65,14 @@ public:
         
         addItem(context->floatImage(_width, _height));
         
-        fromRay->setArg(0, *_getImageMem(0));
+        fromRay->setArg(0, _getImageMem(0));
         
-        spatiotemporalUpsample->setArg(0, *_getImageMem(0));
+        spatiotemporalUpsample->setArg(0, _getImageMem(0));
         spatiotemporalUpsample->setArg(1, *historyFrame);
         
         historyBuffer->setArg(0, *historyFrame);
-        historyBuffer->setArg(1, *_getImageMem(0));
-        historyBuffer->setArg(2, *_getImageMem(0));
+        historyBuffer->setArg(1, _getImageMem(0));
+        historyBuffer->setArg(2, _getImageMem(0));
         
         queue = context->getQueue();
         cl::Event event;
@@ -95,36 +95,36 @@ public:
         inLock();
         
         
-        cl::Buffer * map = (cl::Buffer *)maps->outLock();
+        auto map = maps->outLock();
         if (map == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D const * ray = rays->imageOutLock();
+        auto ray = rays->outLock();
         if (ray == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D const * m = motion->imageOutLock();
+        auto m = motion->outLock();
         if (m == nullptr) {
             release();
             return;
         }
         
-        cl::Image2D const * up = upsample->imageOutLock();
+        auto up = upsample->outLock();
         if (up == nullptr) {
             release();
             return;
         }
         
-        fromRay->setArg(1, *ray);
-        fromRay->setArg(2, *map);
+        fromRay->setArg(1, ray.get_image());
+        fromRay->setArg(2, map.get_buffer());
         
-        spatiotemporalUpsample->setArg(2, *up);
-        spatiotemporalUpsample->setArg(3, *map);
-        spatiotemporalUpsample->setArg(4, *m);
+        spatiotemporalUpsample->setArg(2, up.get_image());
+        spatiotemporalUpsample->setArg(3, map.get_buffer());
+        spatiotemporalUpsample->setArg(4, m.get_image());
         
         queue->enqueueNDRangeKernel(*spatiotemporalUpsample, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
@@ -153,10 +153,10 @@ private:
     
     cl::Image2D * historyFrame = nullptr;
     
-    std::shared_ptr<mush::imageBuffer> rays;
-    std::shared_ptr<mush::ringBuffer> maps;
-    std::shared_ptr<mush::imageBuffer> motion;
-    std::shared_ptr<mush::imageBuffer> upsample;
+    mush::registerContainer<mush::imageBuffer> rays;
+	mush::registerContainer<mush::ringBuffer> maps;
+	mush::registerContainer<mush::imageBuffer> motion;
+	mush::registerContainer<mush::imageBuffer> upsample;
     
     int count = 0;
     

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "trayrace", "trayrace.vcxproj", "{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}"
 EndProject
@@ -11,11 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Performance2.psess = Performance2.psess
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "compressor", "..\..\video-mush\vc\compressor.vcxproj", "{5719BE3D-C333-443F-B14E-BB6566F4E65A}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libazure", "..\..\jon-player\libazure\libazure.vcxproj", "{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}"
-EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -41,39 +40,8 @@ Global
 		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|Win32.Build.0 = Release|Win32
 		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|x64.ActiveCfg = Release|x64
 		{679240E8-5EBC-4C67-9C0F-0E6FA8EBEEC4}.Release|x64.Build.0 = Release|x64
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Debug|Win32.Build.0 = Debug|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Debug|x64.ActiveCfg = Debug|x64
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Debug|x64.Build.0 = Debug|x64
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|Any CPU.ActiveCfg = Release|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|Win32.ActiveCfg = Release|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|Win32.Build.0 = Release|Win32
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|x64.ActiveCfg = Release|x64
-		{5719BE3D-C333-443F-B14E-BB6566F4E65A}.Release|x64.Build.0 = Release|x64
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Win32.ActiveCfg = Debug|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|Win32.Build.0 = Debug|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|x64.ActiveCfg = Debug|x64
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Debug|x64.Build.0 = Debug|x64
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Any CPU.ActiveCfg = Release|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Win32.ActiveCfg = Release|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|Win32.Build.0 = Release|Win32
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|x64.ActiveCfg = Release|x64
-		{3DF98C06-818A-4D1F-9DBE-59B5D26E7533}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(Performance) = preSolution
-		HasPerformanceSessions = true
 	EndGlobalSection
 EndGlobal

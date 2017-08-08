@@ -9,7 +9,7 @@
 #ifndef video_mush_diffuseProcess_hpp
 #define video_mush_diffuseProcess_hpp
 
-#include <Video Mush/imageProcess.hpp>
+#include <Mush Core/imageProcess.hpp>
 
 class diffuseProcess : public mush::imageProcess {
 public:
@@ -21,7 +21,7 @@ public:
         
     }
     
-    void init(std::shared_ptr<mush::opencl> context, std::vector<std::shared_ptr<mush::ringBuffer>> buffers) {
+    void init(std::shared_ptr<mush::opencl> context, std::initializer_list<std::shared_ptr<mush::ringBuffer>> buffers) override {
         
         copy = context->getKernel("copyImage");
         push = context->getKernel("diffuse_push");
@@ -33,7 +33,7 @@ public:
             putLog("Laplace kernel: no buffers");
         }
         
-        buffer = std::dynamic_pointer_cast<mush::imageBuffer>(buffers[0]);
+        buffer = std::dynamic_pointer_cast<mush::imageBuffer>(buffers.begin()[0]);
         if (buffer == nullptr) {
             putLog("Diffuse kernel: bad buffers");
             return;
@@ -41,7 +41,7 @@ public:
         
         buffer->getParams(_width, _height, _size);
         
-        addItem((unsigned char *)context->floatImage(_width, _height));
+        addItem(context->floatImage(_width, _height));
         
         
         scratch = context->floatImage(_width, _height);;
@@ -66,20 +66,27 @@ public:
     }
     
     void process() {
-        inLock();
-        cl::Image2D const * input = buffer->imageOutLock();
+        auto mem = inLock();
+		if (mem == nullptr) {
+			release();
+			return;
+		}
+        auto input = buffer->outLock();
         if (input == nullptr) {
             release();
             return;
         }
-        copy->setArg(0, *input);
-        copy->setArg(1, *_getImageMem(0));
+		cl::Event event;
+        copy->setArg(0, input.get_image());
+        copy->setArg(1, mem.get_image());
         queue->enqueueNDRangeKernel(*copy, cl::NullRange, cl::NDRange(_width, _height), cl::NullRange, NULL, &event);
         event.wait();
         
         buffer->outUnlock();
-        
-        push_seq(_getImageMem(0), first, first_width, first_height);
+
+		//cl::Image2D image_mem = _getImageMem(0);
+
+        //push_seq(&image_mem, first, first_width, first_height);
         push_seq(first, second, second_width, second_height);
         push_seq(second, third, third_width, third_height);
         push_seq(third, fourth, fourth_width, fourth_height);
@@ -90,7 +97,7 @@ public:
         pull_seq(fourth, third, fourth_width, fourth_height, third_width, third_height);
         pull_seq(third, second, third_width, third_height, second_width, second_height);
         pull_seq(second, first, second_width, second_height, first_width, first_height);
-        pull_seq(first, _getImageMem(0), first_width, first_height, _width, _height);
+        //pull_seq(first, &image_mem, first_width, first_height, _width, _height);
         /*
         copy->setArg(0, *fourth);
         copy->setArg(1, *((cl::Image2D *)mem[0]));
@@ -104,6 +111,7 @@ public:
 private:
     
     void push_seq(cl::Image2D * top, cl::Image2D * bottom, const unsigned int &width, const unsigned int &height) {
+		cl::Event event;
         push->setArg(0, *top);
         push->setArg(1, *bottom);
         queue->enqueueNDRangeKernel(*push, cl::NullRange, cl::NDRange(width, height), cl::NullRange, NULL, &event);
@@ -111,7 +119,9 @@ private:
     }
     
     void pull_seq(cl::Image2D * bottom, cl::Image2D * top, const unsigned int &bottom_width, const unsigned int &bottom_height, const unsigned int &top_width, const unsigned int &top_height) {
-        pull_copy->setArg(0, *bottom);
+
+		cl::Event event;
+		pull_copy->setArg(0, *bottom);
         pull_copy->setArg(1, *top);
         pull_copy->setArg(2, *top);
         queue->enqueueNDRangeKernel(*pull_copy, cl::NullRange, cl::NDRange(bottom_width, bottom_height), cl::NullRange, NULL, &event);
@@ -153,15 +163,13 @@ private:
                 * third = nullptr, * third_copy = nullptr,
                 * fourth = nullptr, * fourth_copy = nullptr,
                 * fifth = nullptr, * fifth_copy = nullptr, * scratch = nullptr;
-    std::shared_ptr<mush::imageBuffer> buffer;
+    mush::registerContainer<mush::imageBuffer> buffer;
     
     unsigned int first_width, first_height;
     unsigned int second_width, second_height;
     unsigned int third_width, third_height;
     unsigned int fourth_width, fourth_height;
     unsigned int fifth_width, fifth_height;
-    
-    cl::Event event;
     
 };
 
